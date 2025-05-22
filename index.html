@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +8,9 @@
         href="https://raw.githubusercontent.com/weiweiweiweiweiweiweiwei/weiwei.github.io/refs/heads/main/210px/%E9%BE%8D%E5%AE%AE%E7%BF%81%E6%88%8E%E8%9E%BA.png"
         type="image/x-icon">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400&display=swap');
+
         * {
             margin: 0;
             padding: 0;
@@ -25,6 +27,64 @@
             background-color: #0a001f;
         }
 
+        .top-navbar.hud-style {
+            position: fixed;
+            top: 15px;
+            left: 2vw;
+            right: 2vw;
+            width: auto;
+            height: auto;
+            z-index: 1000;
+            background-color: transparent;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            pointer-events: none;
+            font-family: 'Orbitron', 'Noto Sans TC', sans-serif;
+        }
+
+        .top-navbar.hud-style .hud-brand-left,
+        .top-navbar.hud-style .hud-links-right {
+            pointer-events: auto;
+            display: flex;
+            align-items: center;
+        }
+
+        .top-navbar.hud-style .hud-text {
+            font-size: clamp(0.8rem, 1.8vw, 1rem);
+            color: #8ea8c7;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            padding: 5px 10px;
+            background-color: rgba(10, 20, 40, 0.5);
+            border: 1px solid rgba(70, 130, 180, 0.3);
+            border-left-width: 3px;
+        }
+
+        .top-navbar.hud-style .hud-line-deco {
+            display: inline-block;
+            width: 30px;
+            height: 1px;
+            background-color: rgba(70, 130, 180, 0.5);
+            margin-right: 8px;
+        }
+
+        .top-navbar.hud-style .hud-link {
+            font-size: clamp(0.75rem, 1.7vw, 0.9rem);
+            color: #7aa0c7;
+            text-decoration: none;
+            padding: 5px 10px;
+            margin-left: 15px;
+            border: 1px solid rgba(70, 130, 180, 0.3);
+            background-color: rgba(10, 20, 40, 0.4);
+            transition: color 0.2s, background-color 0.2s;
+        }
+
+        .top-navbar.hud-style .hud-link:hover {
+            color: #c3d9ff;
+            background-color: rgba(70, 130, 180, 0.4);
+        }
+
         .content-overlay {
             position: fixed;
             top: 0;
@@ -37,110 +97,84 @@
             grid-template-columns: 1fr minmax(auto, 1200px) 1fr;
             align-items: center;
             pointer-events: none;
+            padding-top: 0;
         }
 
-        /* 子元素可以跨越多個網格列 */
         .main-header,
         .action-center,
         .mission-briefing {
             grid-column: 2 / 3;
-            /* 內容放在中間列 */
             pointer-events: auto;
-            /* 允許這些區塊交互 */
             width: 100%;
-            /* 佔滿中間列的寬度 */
         }
 
-        /* --- 標題區域 --- */
         .main-header {
-            padding: 4vh 20px 0;
-            /* 頂部內邊距，讓開頂部 */
             text-align: center;
             align-self: start;
-            /* 標題區塊靠上 */
-        }
-
-        .title-block {
-            display: inline-block;
-            /* 讓背景可以只包住文字 */
             position: relative;
-            /* For pseudo-elements */
+            padding: 0 20px;
+            top: 70px;
+        }
+        .title-block{
+             display: inline-block;
+             position: relative;
         }
 
-        /* 主標題：使用 Orbitron 字體，增加科技感 */
         #main-title {
-            font-family: 'Orbitron', 'Noto Sans TC', sans-serif;
-            font-size: clamp(2rem, 6vw, 3.5rem);
-            /* RWD 字體大小 */
-            color: #c3d9ff;
-            /* 淡科技藍 */
-            letter-spacing: 0.1em;
-            font-weight: 500;
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(2.6rem, 7vw, 4.2rem);
+            font-weight: 600;
+            color: rgba(230, 240, 255, 0.9);
+            letter-spacing: 0.08em;
             text-transform: uppercase;
-            /* 可選 */
-            margin-bottom: 5px;
-            /* 移除 text-shadow，採用更清晰的風格 */
-            font-weight:700;
-        }
-
-        /* 副標題：數據流動/Glitch 效果 */
-        .subtitle-glitch {
-            font-size: clamp(0.9rem, 2.5vw, 1.2rem);
-            color: #8ea8c7;
-            /* 稍暗的藍灰色 */
-            font-weight: 300;
+            margin-bottom: 2px;
             position: relative;
-            display: inline-block;
-            overflow: hidden;
-            /* For glitch line */
+            text-shadow:
+                0 0 2px rgba(255, 255, 255, 0.6),
+                0 0 5px rgba(200, 225, 255, 0.8),
+                0 0 12px rgba(150, 200, 255, 0.6),
+                0 0 25px rgba(100, 180, 255, 0.4),
+                0 0 40px rgba(80, 150, 220, 0.25),
+                1px 2px 3px rgba(0, 0, 10, 0.2);
         }
 
-        /* --- 中央行動區 (按鈕) --- */
+        #subtitle {
+            font-family: 'Exo 2', 'Noto Sans TC', sans-serif;
+            font-size: clamp(0.9rem, 2.5vw, 1.25rem);
+            font-weight: 300;
+            color: rgba(170, 200, 230, 0.85);
+            letter-spacing: 0.06em;
+            text-shadow:
+                0 0 2px rgba(170, 200, 230, 0.6),
+                0 0 8px rgba(100, 150, 200, 0.3);
+        }
+        
         .action-center {
             display: flex;
             justify-content: center;
             align-items: center;
             align-self: center;
-            /* 主要內容垂直居中 */
             padding: 20px;
-            margin-top: -5vh;
-            /* 稍微向上偏移，避免完全遮擋正中文物 */
         }
 
-        /* 新的按鈕設計 - Portal Button (玻璃霧感) */
         .portal-button {
             font-family: 'Orbitron', sans-serif;
             font-size: clamp(1.2rem, 3vw, 1.6rem);
             color: #e0f0ff;
-            /* 文字和圖標顏色 */
-
-            /* --- 玻璃霧感核心樣式 --- */
             background-color: rgba(200, 220, 255, 0.1);
-            /* 半透明背景，帶一點淡藍色調 */
             backdrop-filter: blur(10px);
-            /* 背景模糊效果 */
             -webkit-backdrop-filter: blur(10px);
-            /* Safari 瀏覽器兼容 */
             border: 1px solid rgba(220, 235, 255, 0.35);
-            /* 細緻的半透明邊框 */
-            /* --- -------------------- --- */
-
             padding: 12px 28px 12px 48px;
-            /* 增加左邊距給icon */
-            /*   */
-            /* 圓角，玻璃感更柔和 */
             cursor: pointer;
             position: relative;
             overflow: hidden;
-            /* 確保 backdrop-filter 和 border-radius 正常作用 */
             transition: color 0.3s ease, border-color 0.3s ease, background-color 0.3s ease, transform 0.2s ease;
             letter-spacing: 1px;
             text-transform: uppercase;
             display: flex;
-            /* 用於 icon 和文字對齊 */
             align-items: center;
             box-shadow: 0 0 20px rgba(100, 150, 255, 0.1);
-            /* 可選：輕微的發光效果 */
         }
 
         .portal-button .button-text {
@@ -151,18 +185,15 @@
         .portal-button .button-icon {
             position: absolute;
             left: 15px;
-            /* icon 位置 */
             top: 50%;
             transform: translateY(-50%);
             width: 20px;
-            /* icon 大小 */
             height: 20px;
             fill: currentColor;
             z-index: 2;
             transition: transform 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
         }
 
-        /* 按鈕懸停時的內部高光/填充效果 */
         .portal-button::before {
             content: '';
             position: absolute;
@@ -170,14 +201,10 @@
             left: 0;
             width: 0%;
             height: 100%;
-            /* 調整為更適合玻璃感的顏色，或輕微增加亮度 */
             background-color: rgba(220, 235, 255, 0.15);
-            /* 懸停時的內部高光 */
             transition: width 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
             z-index: 0;
-            /* 確保在文字和圖標之下，但在按鈕主背景之上 */
             border-radius: inherit;
-            /* 繼承父元素的圓角 */
         }
 
         .portal-button:hover::before {
@@ -185,27 +212,19 @@
         }
 
         .portal-button:hover {
-            /* 懸停時可以稍微增加背景的飽和度或亮度 */
             background-color: rgba(200, 220, 255, 0.2);
             border-color: rgba(220, 235, 255, 0.7);
-            /* 懸停時邊框更明顯 */
             color: #ffffff;
-            /* 文字變更亮 */
             transform: scale(1.03);
             box-shadow: 0 0 30px rgba(120, 170, 255, 0.2);
-            /* 懸停時發光更強 */
         }
 
         .portal-button:active {
             transform: scale(0.98);
             background-color: rgba(180, 200, 255, 0.25);
-            /* 點擊時稍微暗一點或不同效果 */
         }
 
-        /* Glitch layers for button - 玻璃霧感下，glitch 效果可能需要調整或移除 */
         .button-glitch-layers {
-            /* display: none; */
-            /* 如果不想要 glitch 效果，可以取消註釋這一行 */
             position: absolute;
             top: 0;
             left: 0;
@@ -213,9 +232,7 @@
             height: 100%;
             overflow: hidden;
             z-index: 1;
-            /* 在 ::before 之上，但在文字之下 */
             pointer-events: none;
-            /* 確保不影響按鈕點擊 */
         }
 
         .glitch-layer {
@@ -224,13 +241,10 @@
             left: 0;
             width: 100%;
             height: 100%;
-            /* 調整 glitch 顏色和透明度以配合玻璃效果 */
             background: rgba(180, 220, 255, 0.05);
-            /* 非常淡的 glitch 層 */
             opacity: 0;
         }
 
-        /* Glitch 動畫保持不變，但顏色已調整 */
         .portal-button:hover .glitch-layer:nth-child(1) {
             animation: btn-glitch1 0.5s infinite;
         }
@@ -242,30 +256,42 @@
         .portal-button:hover .glitch-layer:nth-child(3) {
             animation: btn-glitch3 0.4s infinite 0.2s;
         }
+         @keyframes btn-glitch1 {
+            0% { transform: translate(2px, 2px); opacity: 0.5; }
+            25% { transform: translate(-2px, -2px); opacity: 0.2; }
+            50% { transform: translate(2px, -2px); opacity: 0.6; }
+            75% { transform: translate(-2px, 2px); opacity: 0.3; }
+            100% { transform: translate(2px, 2px); opacity: 0.5; }
+        }
+        @keyframes btn-glitch2 {
+            0% { transform: translate(-3px, 3px) scale(1.02); opacity: 0.3; }
+            33% { transform: translate(3px, -3px) scale(0.98); opacity: 0.7; }
+            66% { transform: translate(-3px, -3px) scale(1.01); opacity: 0.2; }
+            100% { transform: translate(3px, 3px) scale(0.99); opacity: 0.6; }
+        }
+        @keyframes btn-glitch3 {
+            0% { clip-path: polygon(0 0, 100% 0, 100% 30%, 0 30%); opacity: 0.4; }
+            20% { clip-path: polygon(0 70%, 100% 70%, 100% 100%, 0 100%); opacity: 0.2; }
+            40% { clip-path: polygon(0 20%, 100% 20%, 100% 50%, 0 50%); opacity: 0.6; }
+            60% { clip-path: polygon(0 0, 100% 0, 100% 10%, 0 10%); opacity: 0.3; }
+            80% { clip-path: polygon(0 90%, 100% 90%, 100% 100%, 0 100%); opacity: 0.5; }
+            100% { clip-path: polygon(0 40%, 100% 40%, 100% 70%, 0 70%); opacity: 0.2; }
+        }
 
-        /* @keyframes btn-glitch1, btn-glitch2, btn-glitch3 保持不變 */
-        /* ... (你原有的 @keyframes btn-glitch1, btn-glitch2, btn-glitch3 規則) ... */
 
-        /* --- 底部任務簡報 --- */
         .mission-briefing {
             padding: 0 20px 4vh;
-            /* 底部內邊距 */
             text-align: center;
             align-self: end;
-            /* 簡報區塊靠下 */
             width: 100%;
         }
 
         .briefing-text-mask {
-            /* 用於創造一個視窗感 */
             max-width: 600px;
-            /* 控制簡報寬度 */
             margin: 0 auto;
             padding: 15px 20px;
             border: 1px solid rgba(100, 180, 255, 0.2);
-            /* 非常淡的邊框 */
             background-color: rgba(10, 0, 31, 0.3);
-            /* 輕微背景，增加可讀性 */
             position: relative;
             overflow: hidden;
         }
@@ -274,30 +300,25 @@
             font-family: 'Noto Sans TC', sans-serif;
             font-size: clamp(0.7rem, 2vw, 0.85rem);
             color: #9fb8d3;
-            /* 更柔和的藍灰色 */
             font-weight: 300;
             line-height: 1.7;
         }
 
         .story-intro span {
-            /* 每行文字獨立，用於動畫或強調 */
             display: block;
             margin-bottom: 2px;
         }
 
         .highlight-text {
             color: #f0a050;
-            /* 橘黃色高亮 */
             font-weight: 500;
         }
 
-        /* 可以添加 data-stream-text 效果 */
         .data-stream-text span {
             opacity: 0;
             animation: fadeInBlock 0.5s forwards;
         }
 
-        /* 讓每行文字逐行顯示 */
         .data-stream-text span:nth-child(1) {
             animation-delay: 0.2s;
         }
@@ -316,29 +337,19 @@
             }
         }
 
-
-        /* --- RWD 微調 --- */
         @media (max-width: 768px) {
-
-            /* 平板及更小 */
             .content-overlay {
                 grid-template-columns: 10px 1fr 10px;
-                /* 減小側邊空白 */
             }
-
             .main-header {
-                padding-top: 3vh;
+                top: 5vh;
             }
-
             .action-center {
                 margin-top: -2vh;
-                /* 減少上移 */
             }
-
             .mission-briefing {
                 padding-bottom: 3vh;
             }
-
             .briefing-text-mask {
                 max-width: 90%;
                 padding: 10px 15px;
@@ -346,88 +357,72 @@
         }
 
         @media (max-width: 480px) {
-
-            /* 手機 */
             .main-header {
-                padding-top: 2vh;
+                top: 3vh;
             }
-
             .action-center {
-                /* 在手機上，按鈕可以考慮移到任務簡報之上，或簡報移到非常底部 */
                 margin-top: 0;
                 position: relative;
-                /* 從絕對定位改為相對，使其自然流動在header下方 */
                 padding: 5vh 0;
-                /* 上下間隔 */
                 align-self: stretch;
-                /* 佔滿寬度 */
             }
-
             .portal-button {
                 margin: 0 auto;
-                /* 按鈕居中 */
             }
-
             .mission-briefing {
                 position: absolute;
-                /* 確保它在底部 */
                 bottom: 2vh;
                 left: 0;
                 right: 0;
                 align-self: flex-end;
-                /* 重置對齊 */
             }
         }
 
-        /* 橫向且高度很小時 */
         @media (max-height: 450px) and (orientation: landscape) {
             .main-header {
-                padding-top: 2vh;
+                top: 2vh;
             }
-
             #main-title {
                 font-size: 1.8rem;
             }
-
             .subtitle-glitch {
                 display: none;
             }
-
-            /* 空間不足 */
             .action-center {
                 margin-top: -2vh;
             }
-
             .portal-button {
                 padding: 10px 20px 10px 40px;
                 font-size: 1rem;
             }
-
             .portal-button .button-icon {
                 width: 16px;
                 height: 16px;
                 left: 12px;
             }
-
             .mission-briefing {
                 display: none;
             }
-
-            /* 空間不足 */
         }
     </style>
 </head>
-
 <body>
+    <nav class="top-navbar hud-style">
+        <div class="hud-brand-left">
+            <span class="hud-line-deco"></span>
+            <span class="hud-text">國立台灣博物館</span>
+        </div>
+        <div class="hud-links-right">
+        </div>
+    </nav>
     <canvas id="starfield-bg"></canvas>
     <div class="content-overlay">
         <header class="main-header">
             <div class="title-block">
                 <h1 id="main-title">時空運輸員</h1>
-                <p id="subtitle" class="subtitle-glitch">蒐集文物歷史資料大作戰！</p>
+                <p id="subtitle">蒐集文物歷史資料大作戰！</p>
             </div>
         </header>
-
         <main class="action-center">
             <button id="enter-button" class="portal-button" aria-label="進入任務">
                 <span class="button-text">進入</span>
@@ -448,9 +443,9 @@
                 <p class="story-intro data-stream-text">
                     <span>警示：//未來.2000025AD//::歷史數據資料庫_完整性受損-狀態：未知異常！</span>
                     <span>
-                        &lt;&lt; 時空總部 &gt;&gt; 緊急召集<span class="highlight-text">
-                                &lt; 時空運輸員 &gt;
-                            </span>
+                        << 時空總部 >> 緊急召集<span class="highlight-text">
+                            < 時空運輸員 >
+                        </span>
                     </span>
                     <span>任務指令：回溯至//2025AD//實體博物館 == 蒐集關鍵數據 == RESTORE_DB_INTEGRITY</span>
                 </p>
@@ -458,59 +453,21 @@
         </footer>
     </div>
     <script>
-        console.log("--- Interactive Pixel Circle Display - Initializing ---");
-
         const canvas = document.getElementById('starfield-bg');
         const ctx = canvas.getContext('2d');
+        if (!canvas || !ctx) { throw new Error("Canvas or Context failed to initialize."); }
 
-        if (!canvas || !ctx) {
-            console.error("FATAL: Canvas or Context not found. Halting script.");
-            throw new Error("Canvas or Context failed to initialize.");
-        }
-
-     
         const CONFIG = {
-         
-            GRID_SPACING: 15,        
-            BASE_RADIUS: 4,
-            MAX_RADIUS_MOUSE: 15,   
-            MAX_RADIUS_RIPPLE: 20,   
-            MOUSE_EFFECT_RADIUS: 150, 
-            RIPPLE_EFFECT_RADIUS: 200,
-
-            PULSE_SPEED: 0.02,
-            PULSE_MAGNITUDE: 0.1,  
-
-            BASE_COLOR_HSLA: [200, 70, 60, 0.3], 
-            MOUSE_HIGHLIGHT_COLOR_HSLA: [180, 80, 70, 0.7],
-            RIPPLE_HIGHLIGHT_COLOR_HSLA: [220, 85, 75, 0.8],
-
-        
-            RIPPLE_SPEED: 5,       
-            RIPPLE_MAX_WAVES: 3,   
-            RIPPLE_TRIGGER_INTERVAL: 3000, 
-            RIPPLE_DURATION_MS: 1500, 
-
-       
-            ARTIFACT_GLITCH_IN_DURATION: 800,  
-            ARTIFACT_DISPLAY_DURATION: 7000,   
-            ARTIFACT_GLITCH_OUT_DURATION: 800, 
-            ARTIFACT_PAUSE_DURATION: 1500,  
-
-            ARTIFACT_PIXEL_SAMPLE_STEP: 8,  
-            ARTIFACT_DISPLAY_SCALE: 0.6,   
-
-        
-            GLITCH_COLOR_1_HSLA: [0, 100, 50, 0.9], 
-            GLITCH_COLOR_2_HSLA: [0, 0, 100, 0.9],  
-            GLITCH_FLICKER_SPEED: 50, 
-
-       
-            USE_OFFSCREEN_ARTIFACT_CANVAS: true, 
-
+            GRID_SPACING: 15, BASE_RADIUS: 4, MAX_RADIUS_MOUSE: 15, MAX_RADIUS_RIPPLE: 20,
+            MOUSE_EFFECT_RADIUS: 150, RIPPLE_EFFECT_RADIUS: 200, PULSE_SPEED: 0.02, PULSE_MAGNITUDE: 0.1,
+            BASE_COLOR_HSLA: [200, 70, 60, 0.3], MOUSE_HIGHLIGHT_COLOR_HSLA: [180, 80, 70, 0.7],
+            RIPPLE_HIGHLIGHT_COLOR_HSLA: [220, 85, 75, 0.8], RIPPLE_SPEED: 5, RIPPLE_MAX_WAVES: 3,
+            RIPPLE_TRIGGER_INTERVAL: 3000, RIPPLE_DURATION_MS: 1500, ARTIFACT_GLITCH_IN_DURATION: 800,
+            ARTIFACT_DISPLAY_DURATION: 7000, ARTIFACT_GLITCH_OUT_DURATION: 800, ARTIFACT_PAUSE_DURATION: 1500,
+            ARTIFACT_PIXEL_SAMPLE_STEP: 8, ARTIFACT_DISPLAY_SCALE: 0.6, GLITCH_COLOR_1_HSLA: [0, 100, 50, 0.9],
+            GLITCH_COLOR_2_HSLA: [0, 0, 100, 0.9], GLITCH_FLICKER_SPEED: 50, USE_OFFSCREEN_ARTIFACT_CANVAS: true,
             BACKGROUND_COLOR: 'rgba(10, 0, 31, 1)',
         };
-
 
         const ARTIFACTS_DATA = [
             { name: "五色鳥", url: "https://raw.githubusercontent.com/weiweiweiweiweiweiweiwei/weiwei.github.io/5d4cabe0bfc222c4bbf462072113ced55a6ff086/pic/%E4%BA%94%E8%89%B2%E9%B3%A5.svg" },
@@ -539,7 +496,6 @@
         let mouse = { x: canvas.width / 2, y: canvas.height / 2, down: false };
         let ripples = [];
         let lastRippleTime = 0;
-
         let currentArtifactIndex = -1;
         let artifactDisplayState = 'idle';
         let artifactStateTime = 0;
@@ -552,17 +508,16 @@
         function lerp(start, end, amt) { return (1 - amt) * start + amt * end; }
 
         async function preloadArtifacts() {
-            console.log("Preloading artifacts...");
             const promises = ARTIFACTS_DATA.map(artifactData => {
                 return new Promise((resolve, reject) => {
                     const img = new Image();
                     img.crossOrigin = "Anonymous";
                     img.onload = () => { PRELOADED_ARTIFACT_IMAGES[artifactData.name] = img; resolve(); };
-                    img.onerror = (e) => { console.error(`Failed to load artifact image: ${artifactData.name} from ${artifactData.url}`, e); reject(new Error(`Failed to load ${artifactData.name}`)); };
+                    img.onerror = () => { reject(new Error(`Failed to load ${artifactData.name}`)); };
                     img.src = artifactData.url;
                 });
             });
-            try { await Promise.all(promises); console.log("All artifact images preloaded (or attempted)."); }
+            try { await Promise.all(promises); }
             catch (error) { console.error("Error during artifact preloading:", error); }
         }
 
@@ -608,64 +563,39 @@
             } catch (e) { console.error("Error processing artifact image (getImageData):", e, artifactName, img.src); return null; }
         }
 
-   
         class GridCircle {
             constructor(x, y) {
-                this.x = x;
-                this.y = y;
+                this.x = x; this.y = y;
                 this.baseRadius = CONFIG.BASE_RADIUS * getRandom(0.8, 1.2);
-                this.radius = this.baseRadius;
-                this.targetRadius = this.baseRadius;
-
-                this.baseColor = [...CONFIG.BASE_COLOR_HSLA]; 
-                this.color = [...this.baseColor];
-                this.targetColor = [...this.baseColor];
-
+                this.radius = this.baseRadius; this.targetRadius = this.baseRadius;
+                this.baseColor = [...CONFIG.BASE_COLOR_HSLA]; this.color = [...this.baseColor]; this.targetColor = [...this.baseColor];
                 this.pulsePhase = Math.random() * Math.PI * 2;
-
-        
-                this.isArtifactPixel = false;
-                this.artifactColor = null;
-                this.isGlitchingForArtifact = false;
-       
-                this.lastGlitchFlickerTime = 0;
+                this.isArtifactPixel = false; this.artifactColor = null; this.isGlitchingForArtifact = false; this.lastGlitchFlickerTime = 0;
             }
-
             update(deltaTime) {
-               
                 this.pulsePhase += CONFIG.PULSE_SPEED * (deltaTime / 16.67);
                 const pulseOffset = Math.sin(this.pulsePhase) * CONFIG.PULSE_MAGNITUDE * this.baseRadius;
-
                 let mDist = getDistance(this.x, this.y, mouse.x, mouse.y);
                 let effectRadius = this.baseRadius + pulseOffset;
                 let effectColor = [...this.baseColor];
-
-
-          
                 if (mDist < CONFIG.MOUSE_EFFECT_RADIUS) {
-                    const mInfluence = 1 - (mDist / CONFIG.MOUSE_EFFECT_RADIUS); 
+                    const mInfluence = 1 - (mDist / CONFIG.MOUSE_EFFECT_RADIUS);
                     effectRadius = lerp(effectRadius, CONFIG.MAX_RADIUS_MOUSE, mInfluence * 0.8);
                     for (let i = 0; i < 4; i++) effectColor[i] = lerp(effectColor[i], CONFIG.MOUSE_HIGHLIGHT_COLOR_HSLA[i], mInfluence);
                 }
-
-              
                 ripples.forEach(ripple => {
                     const rDist = getDistance(this.x, this.y, ripple.x, ripple.y);
                     if (rDist < ripple.currentVisualRadius) {
-               
-                        const timeSinceImpact = (Date.now() - ripple.startTime) - (rDist / CONFIG.RIPPLE_SPEED) * 16.67; 
+                        const timeSinceImpact = (Date.now() - ripple.startTime) - (rDist / CONFIG.RIPPLE_SPEED) * 16.67;
                         let rInfluence = 0;
                         if (timeSinceImpact > 0 && timeSinceImpact < CONFIG.RIPPLE_DURATION_MS) {
-                            rInfluence = Math.sin((timeSinceImpact / CONFIG.RIPPLE_DURATION_MS) * Math.PI) * ripple.strength; 
+                            rInfluence = Math.sin((timeSinceImpact / CONFIG.RIPPLE_DURATION_MS) * Math.PI) * ripple.strength;
                             rInfluence = Math.max(0, rInfluence);
                         }
-
                         effectRadius = lerp(effectRadius, CONFIG.MAX_RADIUS_RIPPLE, rInfluence * 0.7);
                         for (let i = 0; i < 4; i++) effectColor[i] = lerp(effectColor[i], CONFIG.RIPPLE_HIGHLIGHT_COLOR_HSLA[i], rInfluence);
                     }
                 });
-
-             
                 if (this.isGlitchingForArtifact) {
                     if (Date.now() > this.lastGlitchFlickerTime + CONFIG.GLITCH_FLICKER_SPEED) {
                         this.color = (Math.random() > 0.5) ? [...CONFIG.GLITCH_COLOR_1_HSLA] : [...CONFIG.GLITCH_COLOR_2_HSLA];
@@ -673,20 +603,14 @@
                         this.lastGlitchFlickerTime = Date.now();
                     }
                 } else if (this.isArtifactPixel && this.artifactColor) {
-                    this.targetRadius = CONFIG.BASE_RADIUS * 1.1;
-                    this.targetColor = [...this.artifactColor];
-                    effectRadius = this.targetRadius; 
-                    effectColor = this.targetColor;
+                    this.targetRadius = CONFIG.BASE_RADIUS * 1.1; this.targetColor = [...this.artifactColor];
+                    effectRadius = this.targetRadius; effectColor = this.targetColor;
                 } else {
-                    this.targetRadius = this.baseRadius + pulseOffset; 
-                    this.targetColor = effectColor;
+                    this.targetRadius = this.baseRadius + pulseOffset; this.targetColor = effectColor;
                 }
-
-        
                 this.radius = lerp(this.radius, this.targetRadius, 0.2);
                 for (let i = 0; i < 4; i++) this.color[i] = lerp(this.color[i], this.targetColor[i], 0.2);
             }
-
             draw() {
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, Math.max(1, this.radius), 0, Math.PI * 2);
@@ -695,22 +619,15 @@
             }
         }
 
-   
         class Ripple {
             constructor(x, y) {
-                this.x = x;
-                this.y = y;
-                this.startTime = Date.now();
-                this.maxRadius = Math.max(canvas.width, canvas.height); 
-                this.strength = getRandom(0.7, 1); 
-                this.currentVisualRadius = 0; 
-                this.isDone = false;
+                this.x = x; this.y = y; this.startTime = Date.now();
+                this.maxRadius = Math.max(canvas.width, canvas.height);
+                this.strength = getRandom(0.7, 1); this.currentVisualRadius = 0; this.isDone = false;
             }
-
-            update(deltaTime) { 
+            update() {
                 const elapsedTime = Date.now() - this.startTime;
                 this.currentVisualRadius = (elapsedTime / (1000 / 60)) * CONFIG.RIPPLE_SPEED;
-
                 if (elapsedTime > CONFIG.RIPPLE_DURATION_MS + (this.maxRadius / CONFIG.RIPPLE_SPEED) * (1000 / 60) * 0.5) {
                     this.isDone = true;
                 }
@@ -718,24 +635,16 @@
         }
 
         function setup() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            if (CONFIG.USE_OFFSCREEN_ARTIFACT_CANVAS) {
-                for (const key in ARTIFACT_PIXEL_DATA_CACHE) { delete ARTIFACT_PIXEL_DATA_CACHE[key]; }
-            }
+            canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+            if (CONFIG.USE_OFFSCREEN_ARTIFACT_CANVAS) { for (const key in ARTIFACT_PIXEL_DATA_CACHE) { delete ARTIFACT_PIXEL_DATA_CACHE[key]; } }
             gridCircles = [];
             for (let y = CONFIG.GRID_SPACING / 2; y < canvas.height; y += CONFIG.GRID_SPACING) {
                 for (let x = CONFIG.GRID_SPACING / 2; x < canvas.width; x += CONFIG.GRID_SPACING) {
                     gridCircles.push(new GridCircle(x, y));
                 }
             }
-            ripples = [];
-            lastRippleTime = Date.now();
-            currentArtifactIndex = -1;
-            artifactDisplayState = 'idle';
-            artifactStateTime = 0;
-            currentlyMappedArtifactCircles = [];
-            console.log(`Setup complete. ${gridCircles.length} grid circles.`);
+            ripples = []; lastRippleTime = Date.now(); currentArtifactIndex = -1;
+            artifactDisplayState = 'idle'; artifactStateTime = 0; currentlyMappedArtifactCircles = [];
             if (!animationFrameId) animate();
         }
 
@@ -772,8 +681,8 @@
                         }
                     });
                     if (currentlyMappedArtifactCircles.length > 0) { artifactDisplayState = 'glitching-in'; }
-                    else { console.warn("No circles for artifact", artifactData.name); artifactDisplayState = 'paused'; }
-                } else { console.warn("Pixel map fail/empty", artifactData.name); artifactDisplayState = 'paused'; }
+                    else { artifactDisplayState = 'paused'; }
+                } else { artifactDisplayState = 'paused'; }
                 artifactStateTime = 0;
             } else if (artifactDisplayState === 'glitching-in') {
                 if (artifactStateTime >= CONFIG.ARTIFACT_GLITCH_IN_DURATION) {
@@ -804,16 +713,11 @@
             }
         }
 
-        window.addEventListener('resize', () => {
-            if (animationFrameId) cancelAnimationFrame(animationFrameId);
-            animationFrameId = null; setup();
-        });
+        window.addEventListener('resize', () => { if (animationFrameId) cancelAnimationFrame(animationFrameId); animationFrameId = null; setup(); });
         canvas.addEventListener('mousemove', (e) => { mouse.x = e.clientX; mouse.y = e.clientY; });
         canvas.addEventListener('mousedown', () => mouse.down = true);
         canvas.addEventListener('mouseup', () => mouse.down = false);
-        canvas.addEventListener('click', (e) => {
-            if (ripples.length < CONFIG.RIPPLE_MAX_WAVES) { ripples.push(new Ripple(e.clientX, e.clientY)); }
-        });
+        canvas.addEventListener('click', (e) => { if (ripples.length < CONFIG.RIPPLE_MAX_WAVES) { ripples.push(new Ripple(e.clientX, e.clientY)); } });
 
         let animationFrameId;
         let lastTimestamp = 0;
@@ -829,26 +733,14 @@
                 ripples.push(new Ripple(Math.random() * canvas.width, Math.random() * canvas.height));
                 lastRippleTime = Date.now();
             }
-            ripples.forEach(r => r.update(deltaTime)); // deltaTime is passed, but Ripple class might not use it for all calcs
+            ripples.forEach(r => r.update());
             ripples = ripples.filter(r => !r.isDone);
-            gridCircles.forEach(circle => {
-                circle.update(deltaTime); // GridCircle uses deltaTime for pulse
-                circle.draw();
-            });
+            gridCircles.forEach(circle => { circle.update(deltaTime); circle.draw(); });
         }
 
-        document.addEventListener('DOMContentLoaded', async () => {
-            console.log("DOM Content Loaded. Preloading assets for interactive display...");
-            await preloadArtifacts(); setup();
-        });
-
+        document.addEventListener('DOMContentLoaded', async () => { await preloadArtifacts(); setup(); });
         const enterButton = document.getElementById('enter-button');
-        if (enterButton) {
-            enterButton.addEventListener('click', () => {
-                window.location.href = "https://wallace909080.wixstudio.com/my-site";
-            });
-        }
+        if (enterButton) { enterButton.addEventListener('click', () => { window.location.href = "https://wallace909080.wixstudio.com/my-site"; }); }
     </script>
 </body>
-
 </html>
