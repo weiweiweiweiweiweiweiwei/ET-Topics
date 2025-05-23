@@ -189,41 +189,42 @@
 
         #again {
             position: absolute;
-            top: -20%; 
+            top: -20%;
             left: 2%;
-            width: auto; 
-            min-width: 20%; 
+            width: auto;
+            padding: 0 0.5rem;
             z-index: 5;
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             text-align: center;
         }
 
         #task-number-display {
-            font-size: clamp(1.2rem, 2vmin, 1.5rem); 
-            color: #FFD700; 
+            font-size: clamp(1.2rem, 2vmin, 1.5rem);
+            color: #FFD700;
             font-weight: bold;
-            margin-bottom: 0.3em; 
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.6);
+            margin-bottom: 0.3em;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
         .task-icon-png {
-            margin-top: 0.2em; 
-            width: 1.2em; 
-            height: 1.2em; 
-            margin-right: 0.3em; 
+            width: 1em;
+            height: 1em;
+            margin-right: 0.3em;
+            margin-top: 0.2em;
         }
 
-        #again img.again-image { 
-            width: 100%;
-            max-width: 120px; 
-            height: auto;
-            display: none; 
+        #again img.again-image {
+            height: 1.5rem;
+            width: auto;
+            max-width: 100%;
+            display: none;
         }
+
 
         #overlay {
             display: none;
@@ -382,13 +383,12 @@
             </div>
             <div class="hints-wrapper">
                 <div id="again">
-                    <!-- MODIFIED HTML: Replaced SVG with IMG for the task icon -->
                     <span id="task-number-display">
                         <img src="image/task-icon.png" alt="任務圖示" class="task-icon-png">
                         <span class="task-text-content"></span>
                     </span>
                     <img src="https://raw.githubusercontent.com/weiweiweiweiweiweiweiwei/weiwei.github.io/5d4cabe0bfc222c4bbf462072113ced55a6ff086/pic/againtext.svg"
-                        class="again-image" alt="Try again indicator"> 
+                        class="again-image" alt="Try again indicator">
                 </div>
                 <div class="hints">
                     <p id="hint1"></p>
@@ -431,7 +431,6 @@
 
         let currentQuestionIndex = 0;
         const initialQuestions = [
-            // ... (你的題目數據保持不變，這裡為節省空間省略) ...
             {
                 hints: ['I. 從博物館老物品研究傳統織品', 'II. 汲取靈感研究泰雅織藝技術', 'III. 作品融入自然景觀創彩虹橋意象'],
                 artifacts: [
@@ -562,7 +561,7 @@
 
         const againIndicator = document.getElementById('again');
         const taskNumberDisplayEl = document.getElementById('task-number-display');
-        const againImageEl = againIndicator.querySelector('img.again-image'); 
+        const againImageEl = againIndicator.querySelector('img.again-image');
         const taskTextContentEl = taskNumberDisplayEl.querySelector('.task-text-content');
 
 
@@ -584,18 +583,18 @@
 
             if (isInInitialPhase && currentQuestionIndex < initialQuestions.length) {
                 if (taskTextContentEl) taskTextContentEl.textContent = `任務 ${currentQuestionIndex + 1}`;
-                taskNumberDisplayEl.style.display = 'flex'; 
-                if (againImageEl) againImageEl.style.display = 'none'; 
-                againIndicator.style.display = 'flex'; 
+                taskNumberDisplayEl.style.display = 'flex';
+                if (againImageEl) againImageEl.style.display = 'none';
+                againIndicator.style.display = 'flex';
             } else if (!isInInitialPhase && currentQuestionList.length > 0) {
-                taskNumberDisplayEl.style.display = 'none'; 
-                if (againImageEl) againImageEl.style.display = 'block'; 
-                againIndicator.style.display = 'flex'; 
+                taskNumberDisplayEl.style.display = 'none';
+                if (againImageEl) againImageEl.style.display = 'block';
+                againIndicator.style.display = 'flex';
             } else {
-                againIndicator.style.display = 'none'; 
+                againIndicator.style.display = 'none';
             }
         }
-        
+
         function updateModalState(state) {
             modalBg.style.display = 'none';
             modalBgCorrect.style.display = 'none';
@@ -632,7 +631,7 @@
                     modalBgFinish.style.display = 'block';
                     finishNextButton.style.display = 'inline-block';
                     hintsEl.style.display = 'none';
-                    againIndicator.style.display = 'none'; 
+                    againIndicator.style.display = 'none';
                     break;
             }
         }
@@ -661,7 +660,7 @@
             document.getElementById('hint2').textContent = question.hints[1] || '';
             document.getElementById('hint3').textContent = question.hints[2] || '';
             hintsEl.style.display = 'block';
-            updateTaskIndicator(); 
+            updateTaskIndicator();
         }
 
         beginOutScreen.addEventListener('click', () => {
@@ -737,15 +736,15 @@
 
             if (currentQuestionIndex < currentQuestionList.length) {
                 loadQuestion(currentQuestionIndex);
-            } else { 
-                if (wrongQuestions.length > 0) { 
-                    isInInitialPhase = false; 
+            } else {
+                if (wrongQuestions.length > 0) {
+                    isInInitialPhase = false;
                     currentQuestionList = [...wrongQuestions];
                     wrongQuestions = [];
                     currentQuestionIndex = 0;
                     loadQuestion(currentQuestionIndex);
-                } else { 
-                    isInInitialPhase = false; 
+                } else {
+                    isInInitialPhase = false;
                     overlay.style.display = 'block';
                     modal.style.display = 'block';
                     requestAnimationFrame(() => {
@@ -758,12 +757,12 @@
         }
 
         finishNextButton.addEventListener('click', () => {
-            window.location.href = "結尾.html"; 
+            window.location.href = "結尾.html";
         });
 
         window.addEventListener('resize', resizeGame);
         resizeGame();
-        loadQuestion(currentQuestionIndex); 
+        loadQuestion(currentQuestionIndex);
         if (hintsWrapperEl) hintsWrapperEl.style.pointerEvents = 'none';
     </script>
 </body>
