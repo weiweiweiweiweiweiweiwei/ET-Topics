@@ -180,7 +180,6 @@
             line-height: 1.2;
         }
 
-        /* 當螢幕寬度大於等於 768px 時應用的樣式 */
         @media (min-width: 768px) {
             .hints p {
                 margin: 0.3em 0;
@@ -189,17 +188,41 @@
         }
 
         #again {
-            display: none;
             position: absolute;
-            top: -16%;
+            top: -20%; 
             left: 2%;
-            width: 18%;
+            width: auto; 
+            min-width: 20%; 
             z-index: 5;
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            text-align: center;
         }
 
-        #again img {
+        #task-number-display {
+            font-size: clamp(1.2rem, 2vmin, 1.5rem); 
+            color: #FFD700; 
+            font-weight: bold;
+            margin-bottom: 0.3em; 
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .task-icon-png {
+            margin-top: 0.2em; 
+            width: 1.2em; 
+            height: 1.2em; 
+            margin-right: 0.3em; 
+        }
+
+        #again img.again-image { 
             width: 100%;
+            max-width: 120px; 
             height: auto;
+            display: none; 
         }
 
         #overlay {
@@ -359,8 +382,13 @@
             </div>
             <div class="hints-wrapper">
                 <div id="again">
+                    <!-- MODIFIED HTML: Replaced SVG with IMG for the task icon -->
+                    <span id="task-number-display">
+                        <img src="image/task-icon.png" alt="任務圖示" class="task-icon-png">
+                        <span class="task-text-content"></span>
+                    </span>
                     <img src="https://raw.githubusercontent.com/weiweiweiweiweiweiweiwei/weiwei.github.io/5d4cabe0bfc222c4bbf462072113ced55a6ff086/pic/againtext.svg"
-                        class="again" alt="Try again indicator">
+                        class="again-image" alt="Try again indicator"> 
                 </div>
                 <div class="hints">
                     <p id="hint1"></p>
@@ -403,274 +431,113 @@
 
         let currentQuestionIndex = 0;
         const initialQuestions = [
+            // ... (你的題目數據保持不變，這裡為節省空間省略) ...
             {
                 hints: ['I. 從博物館老物品研究傳統織品', 'II. 汲取靈感研究泰雅織藝技術', 'III. 作品融入自然景觀創彩虹橋意象'],
                 artifacts: [
-                    { id: 1, src: 'image/古虹新姿.png', isAnswer: true, top: '10%', left: '62%' },
-                    { id: 2, src: 'image/泰雅族貝珠裙.png', isAnswer: false, top: '35%', left: '60%' },
-                    { id: 3, src: 'image/雲豹.png', isAnswer: false, top: '43%', left: '30%' },
-                    { id: 4, src: 'image/賽夏族貝珠踝飾.png', isAnswer: false, top: '45%', left: '80%' },
-                    { id: 5, src: 'image/香魚.png', isAnswer: false, top: '25%', left: '75%' },
-                    { id: 6, src: 'image/櫻花鉤吻鮭.png', isAnswer: false, top: '57%', left: '65%' },
-                    { id: 7, src: 'image/熊鷹.png', isAnswer: false, top: '23%', left: '16%' },
-                    { id: 8, src: 'image/五色鳥.png', isAnswer: false, top: '15%', left: '35%' },
-                    { id: 9, src: 'image/黑長尾雉.png', isAnswer: false, top: '55%', left: '19%' },
-                    { id: 10, src: 'image/龍宮翁戎螺.png', isAnswer: false, top: '40%', left: '45%' }
+                    { id: 1, src: 'image/古虹新姿.png', isAnswer: true, top: '10%', left: '62%' }, { id: 2, src: 'image/泰雅族貝珠裙.png', isAnswer: false, top: '35%', left: '60%' }, { id: 3, src: 'image/雲豹.png', isAnswer: false, top: '43%', left: '30%' }, { id: 4, src: 'image/賽夏族貝珠踝飾.png', isAnswer: false, top: '45%', left: '80%' }, { id: 5, src: 'image/香魚.png', isAnswer: false, top: '25%', left: '75%' }, { id: 6, src: 'image/櫻花鉤吻鮭.png', isAnswer: false, top: '57%', left: '65%' }, { id: 7, src: 'image/熊鷹.png', isAnswer: false, top: '23%', left: '16%' }, { id: 8, src: 'image/五色鳥.png', isAnswer: false, top: '15%', left: '35%' }, { id: 9, src: 'image/黑長尾雉.png', isAnswer: false, top: '55%', left: '19%' }, { id: 10, src: 'image/龍宮翁戎螺.png', isAnswer: false, top: '40%', left: '45%' }
                 ]
             },
             {
                 hints: ['I. 裙子以麻布為底縫上貝殼小珠', 'II. 象徵部落頭目或富裕人士地位', 'III. 傳統婚禮習俗中的重要聘禮'],
                 artifacts: [
-                    { id: 1, src: 'image/古虹新姿.png', isAnswer: false, top: '10%', left: '62%' },
-                    { id: 2, src: 'image/泰雅族貝珠裙.png', isAnswer: true, top: '35%', left: '60%' },
-                    { id: 3, src: 'image/雲豹.png', isAnswer: false, top: '43%', left: '30%' },
-                    { id: 4, src: 'image/賽夏族貝珠踝飾.png', isAnswer: false, top: '45%', left: '80%' },
-                    { id: 5, src: 'image/香魚.png', isAnswer: false, top: '25%', left: '75%' },
-                    { id: 6, src: 'image/櫻花鉤吻鮭.png', isAnswer: false, top: '57%', left: '65%' },
-                    { id: 7, src: 'image/熊鷹.png', isAnswer: false, top: '23%', left: '16%' },
-                    { id: 8, src: 'image/五色鳥.png', isAnswer: false, top: '15%', left: '35%' },
-                    { id: 9, src: 'image/黑長尾雉.png', isAnswer: false, top: '55%', left: '19%' },
-                    { id: 10, src: 'image/龍宮翁戎螺.png', isAnswer: false, top: '40%', left: '45%' }
+                    { id: 1, src: 'image/古虹新姿.png', isAnswer: false, top: '10%', left: '62%' }, { id: 2, src: 'image/泰雅族貝珠裙.png', isAnswer: true, top: '35%', left: '60%' }, { id: 3, src: 'image/雲豹.png', isAnswer: false, top: '43%', left: '30%' }, { id: 4, src: 'image/賽夏族貝珠踝飾.png', isAnswer: false, top: '45%', left: '80%' }, { id: 5, src: 'image/香魚.png', isAnswer: false, top: '25%', left: '75%' }, { id: 6, src: 'image/櫻花鉤吻鮭.png', isAnswer: false, top: '57%', left: '65%' }, { id: 7, src: 'image/熊鷹.png', isAnswer: false, top: '23%', left: '16%' }, { id: 8, src: 'image/五色鳥.png', isAnswer: false, top: '15%', left: '35%' }, { id: 9, src: 'image/黑長尾雉.png', isAnswer: false, top: '55%', left: '19%' }, { id: 10, src: 'image/龍宮翁戎螺.png', isAnswer: false, top: '40%', left: '45%' }
                 ]
             },
             {
                 hints: ['I. 身體兩側有像雲朵狀的黑色斑點', 'II. 喜歡藏身樹上等待時機進行狩獵', 'III. 魯凱族文化中象徵著高貴與神聖'],
                 artifacts: [
-                    { id: 1, src: 'image/古虹新姿.png', isAnswer: false, top: '10%', left: '62%' },
-                    { id: 2, src: 'image/泰雅族貝珠裙.png', isAnswer: false, top: '35%', left: '60%' },
-                    { id: 3, src: 'image/雲豹.png', isAnswer: true, top: '43%', left: '30%' },
-                    { id: 4, src: 'image/賽夏族貝珠踝飾.png', isAnswer: false, top: '45%', left: '80%' },
-                    { id: 5, src: 'image/香魚.png', isAnswer: false, top: '25%', left: '75%' },
-                    { id: 6, src: 'image/櫻花鉤吻鮭.png', isAnswer: false, top: '57%', left: '65%' },
-                    { id: 7, src: 'image/熊鷹.png', isAnswer: false, top: '23%', left: '16%' },
-                    { id: 8, src: 'image/五色鳥.png', isAnswer: false, top: '15%', left: '35%' },
-                    { id: 9, src: 'image/黑長尾雉.png', isAnswer: false, top: '55%', left: '19%' },
-                    { id: 10, src: 'image/龍宮翁戎螺.png', isAnswer: false, top: '40%', left: '45%' }
+                    { id: 1, src: 'image/古虹新姿.png', isAnswer: false, top: '10%', left: '62%' }, { id: 2, src: 'image/泰雅族貝珠裙.png', isAnswer: false, top: '35%', left: '60%' }, { id: 3, src: 'image/雲豹.png', isAnswer: true, top: '43%', left: '30%' }, { id: 4, src: 'image/賽夏族貝珠踝飾.png', isAnswer: false, top: '45%', left: '80%' }, { id: 5, src: 'image/香魚.png', isAnswer: false, top: '25%', left: '75%' }, { id: 6, src: 'image/櫻花鉤吻鮭.png', isAnswer: false, top: '57%', left: '65%' }, { id: 7, src: 'image/熊鷹.png', isAnswer: false, top: '23%', left: '16%' }, { id: 8, src: 'image/五色鳥.png', isAnswer: false, top: '15%', left: '35%' }, { id: 9, src: 'image/黑長尾雉.png', isAnswer: false, top: '55%', left: '19%' }, { id: 10, src: 'image/龍宮翁戎螺.png', isAnswer: false, top: '40%', left: '45%' }
                 ]
             },
             {
                 hints: ['I. 構成材料包含獸骨貝珠和玻璃珠', 'II. 賽夏族男子在重要場合時會佩戴', 'III. 象徵佩戴者的社會地位與勇氣'],
                 artifacts: [
-                    { id: 1, src: 'image/古虹新姿.png', isAnswer: false, top: '10%', left: '62%' },
-                    { id: 2, src: 'image/泰雅族貝珠裙.png', isAnswer: false, top: '35%', left: '60%' },
-                    { id: 3, src: 'image/雲豹.png', isAnswer: false, top: '43%', left: '30%' },
-                    { id: 4, src: 'image/賽夏族貝珠踝飾.png', isAnswer: true, top: '45%', left: '80%' },
-                    { id: 5, src: 'image/香魚.png', isAnswer: false, top: '25%', left: '75%' },
-                    { id: 6, src: 'image/櫻花鉤吻鮭.png', isAnswer: false, top: '57%', left: '65%' },
-                    { id: 7, src: 'image/熊鷹.png', isAnswer: false, top: '23%', left: '16%' },
-                    { id: 8, src: 'image/五色鳥.png', isAnswer: false, top: '15%', left: '35%' },
-                    { id: 9, src: 'image/黑長尾雉.png', isAnswer: false, top: '55%', left: '19%' },
-                    { id: 10, src: 'image/龍宮翁戎螺.png', isAnswer: false, top: '40%', left: '45%' }
+                    { id: 1, src: 'image/古虹新姿.png', isAnswer: false, top: '10%', left: '62%' }, { id: 2, src: 'image/泰雅族貝珠裙.png', isAnswer: false, top: '35%', left: '60%' }, { id: 3, src: 'image/雲豹.png', isAnswer: false, top: '43%', left: '30%' }, { id: 4, src: 'image/賽夏族貝珠踝飾.png', isAnswer: true, top: '45%', left: '80%' }, { id: 5, src: 'image/香魚.png', isAnswer: false, top: '25%', left: '75%' }, { id: 6, src: 'image/櫻花鉤吻鮭.png', isAnswer: false, top: '57%', left: '65%' }, { id: 7, src: 'image/熊鷹.png', isAnswer: false, top: '23%', left: '16%' }, { id: 8, src: 'image/五色鳥.png', isAnswer: false, top: '15%', left: '35%' }, { id: 9, src: 'image/黑長尾雉.png', isAnswer: false, top: '55%', left: '19%' }, { id: 10, src: 'image/龍宮翁戎螺.png', isAnswer: false, top: '40%', left: '45%' }
                 ]
             },
             {
                 hints: ['I. 身體顏色是橄欖綠色腹部為白色', 'II. 屬於會在河川與海洋間迴游魚類', 'III. 釣魚友釣法利用牠領域性作誘餌'],
                 artifacts: [
-                    { id: 1, src: 'image/古虹新姿.png', isAnswer: false, top: '10%', left: '62%' },
-                    { id: 2, src: 'image/泰雅族貝珠裙.png', isAnswer: false, top: '35%', left: '60%' },
-                    { id: 3, src: 'image/雲豹.png', isAnswer: false, top: '43%', left: '30%' },
-                    { id: 4, src: 'image/賽夏族貝珠踝飾.png', isAnswer: false, top: '45%', left: '80%' },
-                    { id: 5, src: 'image/香魚.png', isAnswer: true, top: '25%', left: '75%' },
-                    { id: 6, src: 'image/櫻花鉤吻鮭.png', isAnswer: false, top: '57%', left: '65%' },
-                    { id: 7, src: 'image/熊鷹.png', isAnswer: false, top: '23%', left: '16%' },
-                    { id: 8, src: 'image/五色鳥.png', isAnswer: false, top: '15%', left: '35%' },
-                    { id: 9, src: 'image/黑長尾雉.png', isAnswer: false, top: '55%', left: '19%' },
-                    { id: 10, src: 'image/龍宮翁戎螺.png', isAnswer: false, top: '40%', left: '45%' }
+                    { id: 1, src: 'image/古虹新姿.png', isAnswer: false, top: '10%', left: '62%' }, { id: 2, src: 'image/泰雅族貝珠裙.png', isAnswer: false, top: '35%', left: '60%' }, { id: 3, src: 'image/雲豹.png', isAnswer: false, top: '43%', left: '30%' }, { id: 4, src: 'image/賽夏族貝珠踝飾.png', isAnswer: false, top: '45%', left: '80%' }, { id: 5, src: 'image/香魚.png', isAnswer: true, top: '25%', left: '75%' }, { id: 6, src: 'image/櫻花鉤吻鮭.png', isAnswer: false, top: '57%', left: '65%' }, { id: 7, src: 'image/熊鷹.png', isAnswer: false, top: '23%', left: '16%' }, { id: 8, src: 'image/五色鳥.png', isAnswer: false, top: '15%', left: '35%' }, { id: 9, src: 'image/黑長尾雉.png', isAnswer: false, top: '55%', left: '19%' }, { id: 10, src: 'image/龍宮翁戎螺.png', isAnswer: false, top: '40%', left: '45%' }
                 ]
             },
             {
                 hints: ['I. 對溪流水質和環境變化非常敏感', 'II. 棲息在臺灣高山地區的溪流中', 'III. 因為對環境敏感所以被稱為國寶魚'],
                 artifacts: [
-                    { id: 1, src: 'image/古虹新姿.png', isAnswer: false, top: '10%', left: '62%' },
-                    { id: 2, src: 'image/泰雅族貝珠裙.png', isAnswer: false, top: '35%', left: '60%' },
-                    { id: 3, src: 'image/雲豹.png', isAnswer: false, top: '43%', left: '30%' },
-                    { id: 4, src: 'image/賽夏族貝珠踝飾.png', isAnswer: false, top: '45%', left: '80%' },
-                    { id: 5, src: 'image/香魚.png', isAnswer: false, top: '25%', left: '75%' },
-                    { id: 6, src: 'image/櫻花鉤吻鮭.png', isAnswer: true, top: '57%', left: '65%' },
-                    { id: 7, src: 'image/熊鷹.png', isAnswer: false, top: '23%', left: '16%' },
-                    { id: 8, src: 'image/五色鳥.png', isAnswer: false, top: '15%', left: '35%' },
-                    { id: 9, src: 'image/黑長尾雉.png', isAnswer: false, top: '55%', left: '19%' },
-                    { id: 10, src: 'image/龍宮翁戎螺.png', isAnswer: false, top: '40%', left: '45%' }
+                    { id: 1, src: 'image/古虹新姿.png', isAnswer: false, top: '10%', left: '62%' }, { id: 2, src: 'image/泰雅族貝珠裙.png', isAnswer: false, top: '35%', left: '60%' }, { id: 3, src: 'image/雲豹.png', isAnswer: false, top: '43%', left: '30%' }, { id: 4, src: 'image/賽夏族貝珠踝飾.png', isAnswer: false, top: '45%', left: '80%' }, { id: 5, src: 'image/香魚.png', isAnswer: false, top: '25%', left: '75%' }, { id: 6, src: 'image/櫻花鉤吻鮭.png', isAnswer: true, top: '57%', left: '65%' }, { id: 7, src: 'image/熊鷹.png', isAnswer: false, top: '23%', left: '16%' }, { id: 8, src: 'image/五色鳥.png', isAnswer: false, top: '15%', left: '35%' }, { id: 9, src: 'image/黑長尾雉.png', isAnswer: false, top: '55%', left: '19%' }, { id: 10, src: 'image/龍宮翁戎螺.png', isAnswer: false, top: '40%', left: '45%' }
                 ]
             },
             {
                 hints: ['I. 殼表面有如同橘紅色火焰狀的斑紋', 'II. 主要棲息在水深五十至兩百五十米', 'III. 數量稀少是深海中的獨特稀有物種'],
                 artifacts: [
-                    { id: 1, src: 'image/寬尾鳳蝶.png', isAnswer: false, top: '10%', left: '58%' },
-                    { id: 2, src: 'image/台灣藍鵲.png', isAnswer: false, top: '35%', left: '60%' },
-                    { id: 3, src: 'image/硫磺.png', isAnswer: false, top: '43%', left: '30%' },
-                    { id: 4, src: 'image/石虎.png', isAnswer: false, top: '45%', left: '80%' },
-                    { id: 5, src: 'image/黑長尾雉.png', isAnswer: false, top: '25%', left: '75%' },
-                    { id: 6, src: 'image/穿山甲.png', isAnswer: false, top: '57%', left: '65%' },
-                    { id: 7, src: 'image/排灣族木盾.png', isAnswer: false, top: '23%', left: '16%' },
-                    { id: 8, src: 'image/龍宮翁戎螺.png', isAnswer: true, top: '15%', left: '35%' },
-                    { id: 9, src: 'image/北投石.png', isAnswer: false, top: '55%', left: '15%' },
-                    { id: 10, src: 'image/台灣水鹿.png', isAnswer: false, top: '40%', left: '45%' }
+                    { id: 1, src: 'image/寬尾鳳蝶.png', isAnswer: false, top: '10%', left: '58%' }, { id: 2, src: 'image/台灣藍鵲.png', isAnswer: false, top: '35%', left: '60%' }, { id: 3, src: 'image/硫磺.png', isAnswer: false, top: '43%', left: '30%' }, { id: 4, src: 'image/石虎.png', isAnswer: false, top: '45%', left: '80%' }, { id: 5, src: 'image/黑長尾雉.png', isAnswer: false, top: '25%', left: '75%' }, { id: 6, src: 'image/穿山甲.png', isAnswer: false, top: '57%', left: '65%' }, { id: 7, src: 'image/排灣族木盾.png', isAnswer: false, top: '23%', left: '16%' }, { id: 8, src: 'image/龍宮翁戎螺.png', isAnswer: true, top: '15%', left: '35%' }, { id: 9, src: 'image/北投石.png', isAnswer: false, top: '55%', left: '15%' }, { id: 10, src: 'image/台灣水鹿.png', isAnswer: false, top: '40%', left: '45%' }
                 ]
             },
             {
                 hints: ['I. 牠的眼睛虹膜呈現漂亮的紅褐色', 'II. 雄鳥的腳上具有明顯的距', 'III. 通常在晨昏或起霧時比較活躍'],
                 artifacts: [
-                    { id: 1, src: 'image/寬尾鳳蝶.png', isAnswer: false, top: '10%', left: '58%' },
-                    { id: 2, src: 'image/台灣藍鵲.png', isAnswer: false, top: '35%', left: '60%' },
-                    { id: 3, src: 'image/硫磺.png', isAnswer: false, top: '43%', left: '30%' },
-                    { id: 4, src: 'image/石虎.png', isAnswer: false, top: '45%', left: '80%' },
-                    { id: 5, src: 'image/黑長尾雉.png', isAnswer: true, top: '25%', left: '75%' },
-                    { id: 6, src: 'image/穿山甲.png', isAnswer: false, top: '57%', left: '65%' },
-                    { id: 7, src: 'image/排灣族木盾.png', isAnswer: false, top: '23%', left: '16%' },
-                    { id: 8, src: 'image/龍宮翁戎螺.png', isAnswer: false, top: '15%', left: '35%' },
-                    { id: 9, src: 'image/北投石.png', isAnswer: false, top: '55%', left: '15%' },
-                    { id: 10, src: 'image/台灣水鹿.png', isAnswer: false, top: '40%', left: '45%' }
+                    { id: 1, src: 'image/寬尾鳳蝶.png', isAnswer: false, top: '10%', left: '58%' }, { id: 2, src: 'image/台灣藍鵲.png', isAnswer: false, top: '35%', left: '60%' }, { id: 3, src: 'image/硫磺.png', isAnswer: false, top: '43%', left: '30%' }, { id: 4, src: 'image/石虎.png', isAnswer: false, top: '45%', left: '80%' }, { id: 5, src: 'image/黑長尾雉.png', isAnswer: true, top: '25%', left: '75%' }, { id: 6, src: 'image/穿山甲.png', isAnswer: false, top: '57%', left: '65%' }, { id: 7, src: 'image/排灣族木盾.png', isAnswer: false, top: '23%', left: '16%' }, { id: 8, src: 'image/龍宮翁戎螺.png', isAnswer: false, top: '15%', left: '35%' }, { id: 9, src: 'image/北投石.png', isAnswer: false, top: '55%', left: '15%' }, { id: 10, src: 'image/台灣水鹿.png', isAnswer: false, top: '40%', left: '45%' }
                 ]
             },
             {
                 hints: ['I. 翅膀為黑色帶有橘紅色斑點', 'II. 後翅具有寬大且顯著的尾突', 'III. 幼蟲以臺灣檫樹的新芽及嫩葉為食'],
                 artifacts: [
-                    { id: 1, src: 'image/寬尾鳳蝶.png', isAnswer: true, top: '10%', left: '58%' },
-                    { id: 2, src: 'image/台灣藍鵲.png', isAnswer: false, top: '35%', left: '60%' },
-                    { id: 3, src: 'image/硫磺.png', isAnswer: false, top: '43%', left: '30%' },
-                    { id: 4, src: 'image/石虎.png', isAnswer: false, top: '45%', left: '80%' },
-                    { id: 5, src: 'image/黑長尾雉.png', isAnswer: false, top: '25%', left: '75%' },
-                    { id: 6, src: 'image/穿山甲.png', isAnswer: false, top: '57%', left: '65%' },
-                    { id: 7, src: 'image/排灣族木盾.png', isAnswer: false, top: '23%', left: '16%' },
-                    { id: 8, src: 'image/龍宮翁戎螺.png', isAnswer: false, top: '15%', left: '35%' },
-                    { id: 9, src: 'image/北投石.png', isAnswer: false, top: '55%', left: '15%' },
-                    { id: 10, src: 'image/台灣水鹿.png', isAnswer: false, top: '40%', left: '45%' }
+                    { id: 1, src: 'image/寬尾鳳蝶.png', isAnswer: true, top: '10%', left: '58%' }, { id: 2, src: 'image/台灣藍鵲.png', isAnswer: false, top: '35%', left: '60%' }, { id: 3, src: 'image/硫磺.png', isAnswer: false, top: '43%', left: '30%' }, { id: 4, src: 'image/石虎.png', isAnswer: false, top: '45%', left: '80%' }, { id: 5, src: 'image/黑長尾雉.png', isAnswer: false, top: '25%', left: '75%' }, { id: 6, src: 'image/穿山甲.png', isAnswer: false, top: '57%', left: '65%' }, { id: 7, src: 'image/排灣族木盾.png', isAnswer: false, top: '23%', left: '16%' }, { id: 8, src: 'image/龍宮翁戎螺.png', isAnswer: false, top: '15%', left: '35%' }, { id: 9, src: 'image/北投石.png', isAnswer: false, top: '55%', left: '15%' }, { id: 10, src: 'image/台灣水鹿.png', isAnswer: false, top: '40%', left: '45%' }
                 ]
             },
             {
                 hints: ['I. 成鳥眼睛是耀眼的金黃色', 'II. 牠的嘴部與腳是醒目的紅色', 'III. 性情兇悍特別是繁殖期領域性強'],
                 artifacts: [
-                    { id: 1, src: 'image/寬尾鳳蝶.png', isAnswer: false, top: '10%', left: '58%' },
-                    { id: 2, src: 'image/台灣藍鵲.png', isAnswer: true, top: '35%', left: '60%' },
-                    { id: 3, src: 'image/硫磺.png', isAnswer: false, top: '43%', left: '30%' },
-                    { id: 4, src: 'image/石虎.png', isAnswer: false, top: '45%', left: '80%' },
-                    { id: 5, src: 'image/黑長尾雉.png', isAnswer: false, top: '25%', left: '75%' },
-                    { id: 6, src: 'image/穿山甲.png', isAnswer: false, top: '57%', left: '65%' },
-                    { id: 7, src: 'image/排灣族木盾.png', isAnswer: false, top: '23%', left: '16%' },
-                    { id: 8, src: 'image/龍宮翁戎螺.png', isAnswer: false, top: '15%', left: '35%' },
-                    { id: 9, src: 'image/北投石.png', isAnswer: false, top: '55%', left: '15%' },
-                    { id: 10, src: 'image/台灣水鹿.png', isAnswer: false, top: '40%', left: '45%' }
+                    { id: 1, src: 'image/寬尾鳳蝶.png', isAnswer: false, top: '10%', left: '58%' }, { id: 2, src: 'image/台灣藍鵲.png', isAnswer: true, top: '35%', left: '60%' }, { id: 3, src: 'image/硫磺.png', isAnswer: false, top: '43%', left: '30%' }, { id: 4, src: 'image/石虎.png', isAnswer: false, top: '45%', left: '80%' }, { id: 5, src: 'image/黑長尾雉.png', isAnswer: false, top: '25%', left: '75%' }, { id: 6, src: 'image/穿山甲.png', isAnswer: false, top: '57%', left: '65%' }, { id: 7, src: 'image/排灣族木盾.png', isAnswer: false, top: '23%', left: '16%' }, { id: 8, src: 'image/龍宮翁戎螺.png', isAnswer: false, top: '15%', left: '35%' }, { id: 9, src: 'image/北投石.png', isAnswer: false, top: '55%', left: '15%' }, { id: 10, src: 'image/台灣水鹿.png', isAnswer: false, top: '40%', left: '45%' }
                 ]
             },
             {
                 hints: ['I. 其顏色像金黃色的顆粒狀物', 'II. 英文名字 Sulfur 來自拉丁語有關火閃電', 'III. 常常在火山爆發後自然形成出現'],
                 artifacts: [
-                    { id: 1, src: 'image/寬尾鳳蝶.png', isAnswer: false, top: '10%', left: '58%' },
-                    { id: 2, src: 'image/台灣藍鵲.png', isAnswer: false, top: '35%', left: '60%' },
-                    { id: 3, src: 'image/硫磺.png', isAnswer: true, top: '43%', left: '30%' },
-                    { id: 4, src: 'image/石虎.png', isAnswer: false, top: '45%', left: '80%' },
-                    { id: 5, src: 'image/黑長尾雉.png', isAnswer: false, top: '25%', left: '75%' },
-                    { id: 6, src: 'image/穿山甲.png', isAnswer: false, top: '57%', left: '65%' },
-                    { id: 7, src: 'image/排灣族木盾.png', isAnswer: false, top: '23%', left: '16%' },
-                    { id: 8, src: 'image/龍宮翁戎螺.png', isAnswer: false, top: '15%', left: '35%' },
-                    { id: 9, src: 'image/北投石.png', isAnswer: false, top: '55%', left: '15%' },
-                    { id: 10, src: 'image/台灣水鹿.png', isAnswer: false, top: '40%', left: '45%' }
+                    { id: 1, src: 'image/寬尾鳳蝶.png', isAnswer: false, top: '10%', left: '58%' }, { id: 2, src: 'image/台灣藍鵲.png', isAnswer: false, top: '35%', left: '60%' }, { id: 3, src: 'image/硫磺.png', isAnswer: true, top: '43%', left: '30%' }, { id: 4, src: 'image/石虎.png', isAnswer: false, top: '45%', left: '80%' }, { id: 5, src: 'image/黑長尾雉.png', isAnswer: false, top: '25%', left: '75%' }, { id: 6, src: 'image/穿山甲.png', isAnswer: false, top: '57%', left: '65%' }, { id: 7, src: 'image/排灣族木盾.png', isAnswer: false, top: '23%', left: '16%' }, { id: 8, src: 'image/龍宮翁戎螺.png', isAnswer: false, top: '15%', left: '35%' }, { id: 9, src: 'image/北投石.png', isAnswer: false, top: '55%', left: '15%' }, { id: 10, src: 'image/台灣水鹿.png', isAnswer: false, top: '40%', left: '45%' }
                 ]
             },
             {
                 hints: ['I. 是由鉀鉛和硫酸鹽所組成的礦物', 'II. 英文名稱直接來自臺灣北投溫泉', 'III. 這種礦物本身含有微量放射性'],
                 artifacts: [
-                    { id: 1, src: 'image/寬尾鳳蝶.png', isAnswer: false, top: '10%', left: '58%' },
-                    { id: 2, src: 'image/台灣藍鵲.png', isAnswer: false, top: '35%', left: '60%' },
-                    { id: 3, src: 'image/硫磺.png', isAnswer: false, top: '43%', left: '30%' },
-                    { id: 4, src: 'image/石虎.png', isAnswer: false, top: '45%', left: '80%' },
-                    { id: 5, src: 'image/黑長尾雉.png', isAnswer: false, top: '25%', left: '75%' },
-                    { id: 6, src: 'image/穿山甲.png', isAnswer: false, top: '57%', left: '65%' },
-                    { id: 7, src: 'image/排灣族木盾.png', isAnswer: false, top: '23%', left: '16%' },
-                    { id: 8, src: 'image/龍宮翁戎螺.png', isAnswer: false, top: '15%', left: '35%' },
-                    { id: 9, src: 'image/北投石.png', isAnswer: true, top: '55%', left: '15%' },
-                    { id: 10, src: 'image/台灣水鹿.png', isAnswer: false, top: '40%', left: '45%' }
+                    { id: 1, src: 'image/寬尾鳳蝶.png', isAnswer: false, top: '10%', left: '58%' }, { id: 2, src: 'image/台灣藍鵲.png', isAnswer: false, top: '35%', left: '60%' }, { id: 3, src: 'image/硫磺.png', isAnswer: false, top: '43%', left: '30%' }, { id: 4, src: 'image/石虎.png', isAnswer: false, top: '45%', left: '80%' }, { id: 5, src: 'image/黑長尾雉.png', isAnswer: false, top: '25%', left: '75%' }, { id: 6, src: 'image/穿山甲.png', isAnswer: false, top: '57%', left: '65%' }, { id: 7, src: 'image/排灣族木盾.png', isAnswer: false, top: '23%', left: '16%' }, { id: 8, src: 'image/龍宮翁戎螺.png', isAnswer: false, top: '15%', left: '35%' }, { id: 9, src: 'image/北投石.png', isAnswer: true, top: '55%', left: '15%' }, { id: 10, src: 'image/台灣水鹿.png', isAnswer: false, top: '40%', left: '45%' }
                 ]
             },
             {
                 hints: ['I. 雌雄外觀極為相似不易分辨', 'II. 羽毛顏色以綠色為主適合隱身樹葉間', 'III. 鳴叫聲特色是單調且聽起來很渾厚'],
                 artifacts: [
-                    { id: 1, src: 'image/五色鳥.png', isAnswer: true, top: '10%', left: '55%' },
-                    { id: 2, src: 'image/石虎.png', isAnswer: false, top: '35%', left: '60%' },
-                    { id: 3, src: 'image/雲豹.png', isAnswer: false, top: '43%', left: '30%' },
-                    { id: 4, src: 'image/排灣族木盾.png', isAnswer: false, top: '45%', left: '80%' },
-                    { id: 5, src: 'image/古虹新姿.png', isAnswer: false, top: '20%', left: '75%' },
-                    { id: 6, src: 'image/穿山甲.png', isAnswer: false, top: '57%', left: '65%' },
-                    { id: 7, src: 'image/台灣藍鵲.png', isAnswer: false, top: '23%', left: '16%' },
-                    { id: 8, src: 'image/熊鷹.png', isAnswer: false, top: '15%', left: '35%' },
-                    { id: 9, src: 'image/台灣水鹿.png', isAnswer: false, top: '55%', left: '15%' },
-                    { id: 10, src: 'image/寬尾鳳蝶.png', isAnswer: false, top: '40%', left: '45%' }
+                    { id: 1, src: 'image/五色鳥.png', isAnswer: true, top: '10%', left: '55%' }, { id: 2, src: 'image/石虎.png', isAnswer: false, top: '35%', left: '60%' }, { id: 3, src: 'image/雲豹.png', isAnswer: false, top: '43%', left: '30%' }, { id: 4, src: 'image/排灣族木盾.png', isAnswer: false, top: '45%', left: '80%' }, { id: 5, src: 'image/古虹新姿.png', isAnswer: false, top: '20%', left: '75%' }, { id: 6, src: 'image/穿山甲.png', isAnswer: false, top: '57%', left: '65%' }, { id: 7, src: 'image/台灣藍鵲.png', isAnswer: false, top: '23%', left: '16%' }, { id: 8, src: 'image/熊鷹.png', isAnswer: false, top: '15%', left: '35%' }, { id: 9, src: 'image/台灣水鹿.png', isAnswer: false, top: '55%', left: '15%' }, { id: 10, src: 'image/寬尾鳳蝶.png', isAnswer: false, top: '40%', left: '45%' }
                 ]
             },
             {
                 hints: ['I. 屬於臺灣原住民盾中的屋頂類型', 'II. 傳世多為排灣族貴族階級所持用', 'III. 盾上常繪刻人頭紋百步蛇或幾何紋'],
                 artifacts: [
-                    { id: 1, src: 'image/五色鳥.png', isAnswer: false, top: '10%', left: '55%' },
-                    { id: 2, src: 'image/石虎.png', isAnswer: false, top: '35%', left: '60%' },
-                    { id: 3, src: 'image/雲豹.png', isAnswer: false, top: '43%', left: '30%' },
-                    { id: 4, src: 'image/排灣族木盾.png', isAnswer: true, top: '45%', left: '80%' },
-                    { id: 5, src: 'image/古虹新姿.png', isAnswer: false, top: '20%', left: '75%' },
-                    { id: 6, src: 'image/穿山甲.png', isAnswer: false, top: '57%', left: '65%' },
-                    { id: 7, src: 'image/台灣藍鵲.png', isAnswer: false, top: '23%', left: '16%' },
-                    { id: 8, src: 'image/熊鷹.png', isAnswer: false, top: '15%', left: '35%' },
-                    { id: 9, src: 'image/台灣水鹿.png', isAnswer: false, top: '55%', left: '15%' },
-                    { id: 10, src: 'image/寬尾鳳蝶.png', isAnswer: false, top: '40%', left: '45%' }
+                    { id: 1, src: 'image/五色鳥.png', isAnswer: false, top: '10%', left: '55%' }, { id: 2, src: 'image/石虎.png', isAnswer: false, top: '35%', left: '60%' }, { id: 3, src: 'image/雲豹.png', isAnswer: false, top: '43%', left: '30%' }, { id: 4, src: 'image/排灣族木盾.png', isAnswer: true, top: '45%', left: '80%' }, { id: 5, src: 'image/古虹新姿.png', isAnswer: false, top: '20%', left: '75%' }, { id: 6, src: 'image/穿山甲.png', isAnswer: false, top: '57%', left: '65%' }, { id: 7, src: 'image/台灣藍鵲.png', isAnswer: false, top: '23%', left: '16%' }, { id: 8, src: 'image/熊鷹.png', isAnswer: false, top: '15%', left: '35%' }, { id: 9, src: 'image/台灣水鹿.png', isAnswer: false, top: '55%', left: '15%' }, { id: 10, src: 'image/寬尾鳳蝶.png', isAnswer: false, top: '40%', left: '45%' }
                 ]
             },
             {
                 hints: ['I. 根據 IUCN紅皮書列為瀕臨絕種物種', 'II. 耳後是黑底帶有明顯的白斑', 'III. 主要食物是小型哺乳動物及各種小動物'],
                 artifacts: [
-                    { id: 1, src: 'image/五色鳥.png', isAnswer: false, top: '10%', left: '55%' },
-                    { id: 2, src: 'image/石虎.png', isAnswer: true, top: '35%', left: '60%' },
-                    { id: 3, src: 'image/雲豹.png', isAnswer: false, top: '43%', left: '30%' },
-                    { id: 4, src: 'image/排灣族木盾.png', isAnswer: false, top: '45%', left: '80%' },
-                    { id: 5, src: 'image/古虹新姿.png', isAnswer: false, top: '20%', left: '75%' },
-                    { id: 6, src: 'image/穿山甲.png', isAnswer: false, top: '57%', left: '65%' },
-                    { id: 7, src: 'image/台灣藍鵲.png', isAnswer: false, top: '23%', left: '16%' },
-                    { id: 8, src: 'image/熊鷹.png', isAnswer: false, top: '15%', left: '35%' },
-                    { id: 9, src: 'image/台灣水鹿.png', isAnswer: false, top: '55%', left: '15%' },
-                    { id: 10, src: 'image/寬尾鳳蝶.png', isAnswer: false, top: '40%', left: '45%' }
+                    { id: 1, src: 'image/五色鳥.png', isAnswer: false, top: '10%', left: '55%' }, { id: 2, src: 'image/石虎.png', isAnswer: true, top: '35%', left: '60%' }, { id: 3, src: 'image/雲豹.png', isAnswer: false, top: '43%', left: '30%' }, { id: 4, src: 'image/排灣族木盾.png', isAnswer: false, top: '45%', left: '80%' }, { id: 5, src: 'image/古虹新姿.png', isAnswer: false, top: '20%', left: '75%' }, { id: 6, src: 'image/穿山甲.png', isAnswer: false, top: '57%', left: '65%' }, { id: 7, src: 'image/台灣藍鵲.png', isAnswer: false, top: '23%', left: '16%' }, { id: 8, src: 'image/熊鷹.png', isAnswer: false, top: '15%', left: '35%' }, { id: 9, src: 'image/台灣水鹿.png', isAnswer: false, top: '55%', left: '15%' }, { id: 10, src: 'image/寬尾鳳蝶.png', isAnswer: false, top: '40%', left: '45%' }
                 ]
             },
             {
                 hints: ['I. 因眼眶下腺體明顯所以俗稱四目鹿', 'II. 是臺灣所有草食性動物中體型最大', 'III. 牠的體色會隨著季節的變化而改變'],
                 artifacts: [
-                    { id: 1, src: 'image/五色鳥.png', isAnswer: false, top: '10%', left: '55%' },
-                    { id: 2, src: 'image/石虎.png', isAnswer: false, top: '35%', left: '60%' },
-                    { id: 3, src: 'image/雲豹.png', isAnswer: false, top: '43%', left: '30%' },
-                    { id: 4, src: 'image/排灣族木盾.png', isAnswer: false, top: '45%', left: '80%' },
-                    { id: 5, src: 'image/古虹新姿.png', isAnswer: false, top: '20%', left: '75%' },
-                    { id: 6, src: 'image/穿山甲.png', isAnswer: false, top: '57%', left: '65%' },
-                    { id: 7, src: 'image/台灣藍鵲.png', isAnswer: false, top: '23%', left: '16%' },
-                    { id: 8, src: 'image/熊鷹.png', isAnswer: false, top: '15%', left: '35%' },
-                    { id: 9, src: 'image/台灣水鹿.png', isAnswer: true, top: '55%', left: '15%' },
-                    { id: 10, src: 'image/寬尾鳳蝶.png', isAnswer: false, top: '40%', left: '45%' }
+                    { id: 1, src: 'image/五色鳥.png', isAnswer: false, top: '10%', left: '55%' }, { id: 2, src: 'image/石虎.png', isAnswer: false, top: '35%', left: '60%' }, { id: 3, src: 'image/雲豹.png', isAnswer: false, top: '43%', left: '30%' }, { id: 4, src: 'image/排灣族木盾.png', isAnswer: false, top: '45%', left: '80%' }, { id: 5, src: 'image/古虹新姿.png', isAnswer: false, top: '20%', left: '75%' }, { id: 6, src: 'image/穿山甲.png', isAnswer: false, top: '57%', left: '65%' }, { id: 7, src: 'image/台灣藍鵲.png', isAnswer: false, top: '23%', left: '16%' }, { id: 8, src: 'image/熊鷹.png', isAnswer: false, top: '15%', left: '35%' }, { id: 9, src: 'image/台灣水鹿.png', isAnswer: true, top: '55%', left: '15%' }, { id: 10, src: 'image/寬尾鳳蝶.png', isAnswer: false, top: '40%', left: '45%' }
                 ]
             },
             {
                 hints: ['I. 雌鳥與雄鳥外觀幾乎相同', 'II. 後枕羽毛較長常豎立形成短羽冠', 'III. 飛行時雙翼會上揚呈現獨特 V形'],
                 artifacts: [
-                    { id: 1, src: 'image/五色鳥.png', isAnswer: false, top: '10%', left: '55%' },
-                    { id: 2, src: 'image/石虎.png', isAnswer: false, top: '35%', left: '60%' },
-                    { id: 3, src: 'image/雲豹.png', isAnswer: false, top: '43%', left: '30%' },
-                    { id: 4, src: 'image/排灣族木盾.png', isAnswer: false, top: '45%', left: '80%' },
-                    { id: 5, src: 'image/古虹新姿.png', isAnswer: false, top: '20%', left: '75%' },
-                    { id: 6, src: 'image/穿山甲.png', isAnswer: false, top: '57%', left: '65%' },
-                    { id: 7, src: 'image/台灣藍鵲.png', isAnswer: false, top: '23%', left: '16%' },
-                    { id: 8, src: 'image/熊鷹.png', isAnswer: true, top: '15%', left: '35%' },
-                    { id: 9, src: 'image/台灣水鹿.png', isAnswer: false, top: '55%', left: '15%' },
-                    { id: 10, src: 'image/寬尾鳳蝶.png', isAnswer: false, top: '40%', left: '45%' }
+                    { id: 1, src: 'image/五色鳥.png', isAnswer: false, top: '10%', left: '55%' }, { id: 2, src: 'image/石虎.png', isAnswer: false, top: '35%', left: '60%' }, { id: 3, src: 'image/雲豹.png', isAnswer: false, top: '43%', left: '30%' }, { id: 4, src: 'image/排灣族木盾.png', isAnswer: false, top: '45%', left: '80%' }, { id: 5, src: 'image/古虹新姿.png', isAnswer: false, top: '20%', left: '75%' }, { id: 6, src: 'image/穿山甲.png', isAnswer: false, top: '57%', left: '65%' }, { id: 7, src: 'image/台灣藍鵲.png', isAnswer: false, top: '23%', left: '16%' }, { id: 8, src: 'image/熊鷹.png', isAnswer: true, top: '15%', left: '35%' }, { id: 9, src: 'image/台灣水鹿.png', isAnswer: false, top: '55%', left: '15%' }, { id: 10, src: 'image/寬尾鳳蝶.png', isAnswer: false, top: '40%', left: '45%' }
                 ]
             },
             {
                 hints: ['I. 根據 IUCN紅皮書列為極危物種', 'II. 全身覆蓋著堅硬且明顯的鱗片', 'III. 遇到危險會縮成緊密的球狀保護自己'],
                 artifacts: [
-                    { id: 1, src: 'image/五色鳥.png', isAnswer: false, top: '10%', left: '55%' },
-                    { id: 2, src: 'image/石虎.png', isAnswer: false, top: '35%', left: '60%' },
-                    { id: 3, src: 'image/雲豹.png', isAnswer: false, top: '43%', left: '30%' },
-                    { id: 4, src: 'image/排灣族木盾.png', isAnswer: false, top: '45%', left: '80%' },
-                    { id: 5, src: 'image/古虹新姿.png', isAnswer: false, top: '20%', left: '75%' },
-                    { id: 6, src: 'image/穿山甲.png', isAnswer: true, top: '57%', left: '65%' },
-                    { id: 7, src: 'image/台灣藍鵲.png', isAnswer: false, top: '23%', left: '16%' },
-                    { id: 8, src: 'image/熊鷹.png', isAnswer: false, top: '15%', left: '35%' },
-                    { id: 9, src: 'image/台灣水鹿.png', isAnswer: false, top: '55%', left: '15%' },
-                    { id: 10, src: 'image/寬尾鳳蝶.png', isAnswer: false, top: '40%', left: '45%' }
+                    { id: 1, src: 'image/五色鳥.png', isAnswer: false, top: '10%', left: '55%' }, { id: 2, src: 'image/石虎.png', isAnswer: false, top: '35%', left: '60%' }, { id: 3, src: 'image/雲豹.png', isAnswer: false, top: '43%', left: '30%' }, { id: 4, src: 'image/排灣族木盾.png', isAnswer: false, top: '45%', left: '80%' }, { id: 5, src: 'image/古虹新姿.png', isAnswer: false, top: '20%', left: '75%' }, { id: 6, src: 'image/穿山甲.png', isAnswer: true, top: '57%', left: '65%' }, { id: 7, src: 'image/台灣藍鵲.png', isAnswer: false, top: '23%', left: '16%' }, { id: 8, src: 'image/熊鷹.png', isAnswer: false, top: '15%', left: '35%' }, { id: 9, src: 'image/台灣水鹿.png', isAnswer: false, top: '55%', left: '15%' }, { id: 10, src: 'image/寬尾鳳蝶.png', isAnswer: false, top: '40%', left: '45%' }
                 ]
             }
         ];
@@ -694,13 +561,41 @@
         const modalBgFinish = modal.querySelector('.modal-bg-finish');
 
         const againIndicator = document.getElementById('again');
+        const taskNumberDisplayEl = document.getElementById('task-number-display');
+        const againImageEl = againIndicator.querySelector('img.again-image'); 
+        const taskTextContentEl = taskNumberDisplayEl.querySelector('.task-text-content');
+
+
         const hintsEl = document.querySelector('.hints');
         const beginOutScreen = document.getElementById('begin-out');
         const hintsWrapperEl = document.querySelector('.hints-wrapper');
 
         let selectedArtifactData = null;
         let originalSelectedArtifactElement = null;
+        let isInInitialPhase = true;
 
+        function updateTaskIndicator() {
+            const isGameFinished = modalBgFinish.style.display === 'block';
+
+            if (isGameFinished) {
+                againIndicator.style.display = 'none';
+                return;
+            }
+
+            if (isInInitialPhase && currentQuestionIndex < initialQuestions.length) {
+                if (taskTextContentEl) taskTextContentEl.textContent = `任務 ${currentQuestionIndex + 1}`;
+                taskNumberDisplayEl.style.display = 'flex'; 
+                if (againImageEl) againImageEl.style.display = 'none'; 
+                againIndicator.style.display = 'flex'; 
+            } else if (!isInInitialPhase && currentQuestionList.length > 0) {
+                taskNumberDisplayEl.style.display = 'none'; 
+                if (againImageEl) againImageEl.style.display = 'block'; 
+                againIndicator.style.display = 'flex'; 
+            } else {
+                againIndicator.style.display = 'none'; 
+            }
+        }
+        
         function updateModalState(state) {
             modalBg.style.display = 'none';
             modalBgCorrect.style.display = 'none';
@@ -737,7 +632,7 @@
                     modalBgFinish.style.display = 'block';
                     finishNextButton.style.display = 'inline-block';
                     hintsEl.style.display = 'none';
-                    againIndicator.style.display = 'none';
+                    againIndicator.style.display = 'none'; 
                     break;
             }
         }
@@ -766,6 +661,7 @@
             document.getElementById('hint2').textContent = question.hints[1] || '';
             document.getElementById('hint3').textContent = question.hints[2] || '';
             hintsEl.style.display = 'block';
+            updateTaskIndicator(); 
         }
 
         beginOutScreen.addEventListener('click', () => {
@@ -841,15 +737,15 @@
 
             if (currentQuestionIndex < currentQuestionList.length) {
                 loadQuestion(currentQuestionIndex);
-                // againIndicator.style.display = 'none';
-            } else {
-                if (wrongQuestions.length > 0) {
+            } else { 
+                if (wrongQuestions.length > 0) { 
+                    isInInitialPhase = false; 
                     currentQuestionList = [...wrongQuestions];
                     wrongQuestions = [];
                     currentQuestionIndex = 0;
                     loadQuestion(currentQuestionIndex);
-                    againIndicator.style.display = 'block';
-                } else {
+                } else { 
+                    isInInitialPhase = false; 
                     overlay.style.display = 'block';
                     modal.style.display = 'block';
                     requestAnimationFrame(() => {
@@ -862,12 +758,12 @@
         }
 
         finishNextButton.addEventListener('click', () => {
-            window.location.href = "結尾.html";
+            window.location.href = "結尾.html"; 
         });
 
         window.addEventListener('resize', resizeGame);
         resizeGame();
-        loadQuestion(currentQuestionIndex);
+        loadQuestion(currentQuestionIndex); 
         if (hintsWrapperEl) hintsWrapperEl.style.pointerEvents = 'none';
     </script>
 </body>
