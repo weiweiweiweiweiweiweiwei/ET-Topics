@@ -315,10 +315,9 @@
             </button>
         </div>
     </div>
-    <!-- ... (您的 <head>, <style>, 和 <body> HTML 結構保持不變) ... -->
 
     <script>
-        // ... (頂部的變量聲明和 populateArtifactsGridSequentially 函數，以及 Enter 鍵監聽器保持不變) ...
+
         const nameInputOverlay = document.getElementById('nameInputOverlay');
         const playerNameInput = document.getElementById('playerNameInput');
         const submitNameButton = document.getElementById('submitNameButton');
@@ -335,7 +334,8 @@
             '賽夏族貝珠踝飾.png', '雲豹.png', '香魚.png', '黑長尾雉.png',
             '龍宮翁戎螺.png', '泰雅族貝珠裙.png'
         ];
-        const githubPicBaseUrl = 'https://raw.githubusercontent.com/weiweiweiweiweiweiweiwei/weiwei.github.io/refs/heads/main/210px/';
+
+        const githubPicBaseUrl = 'https://raw.githubusercontent.com/weiweiweiweiweiweiweiwei/ET-Topics/8aa0b8d7d066bbbeab3fea7c4028c130f14c0f40/210px/';
 
         if (playerNameInput && submitNameButton) {
             playerNameInput.addEventListener('keypress', function (event) {
