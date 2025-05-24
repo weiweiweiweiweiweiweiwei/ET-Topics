@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -115,9 +116,10 @@
             padding: 0 20px;
             top: 70px;
         }
-        .title-block{
-             display: inline-block;
-             position: relative;
+
+        .title-block {
+            display: inline-block;
+            position: relative;
         }
 
         #main-title {
@@ -148,7 +150,7 @@
                 0 0 2px rgba(170, 200, 230, 0.6),
                 0 0 8px rgba(100, 150, 200, 0.3);
         }
-        
+
         .action-center {
             display: flex;
             justify-content: center;
@@ -256,26 +258,86 @@
         .portal-button:hover .glitch-layer:nth-child(3) {
             animation: btn-glitch3 0.4s infinite 0.2s;
         }
-         @keyframes btn-glitch1 {
-            0% { transform: translate(2px, 2px); opacity: 0.5; }
-            25% { transform: translate(-2px, -2px); opacity: 0.2; }
-            50% { transform: translate(2px, -2px); opacity: 0.6; }
-            75% { transform: translate(-2px, 2px); opacity: 0.3; }
-            100% { transform: translate(2px, 2px); opacity: 0.5; }
+
+        @keyframes btn-glitch1 {
+            0% {
+                transform: translate(2px, 2px);
+                opacity: 0.5;
+            }
+
+            25% {
+                transform: translate(-2px, -2px);
+                opacity: 0.2;
+            }
+
+            50% {
+                transform: translate(2px, -2px);
+                opacity: 0.6;
+            }
+
+            75% {
+                transform: translate(-2px, 2px);
+                opacity: 0.3;
+            }
+
+            100% {
+                transform: translate(2px, 2px);
+                opacity: 0.5;
+            }
         }
+
         @keyframes btn-glitch2 {
-            0% { transform: translate(-3px, 3px) scale(1.02); opacity: 0.3; }
-            33% { transform: translate(3px, -3px) scale(0.98); opacity: 0.7; }
-            66% { transform: translate(-3px, -3px) scale(1.01); opacity: 0.2; }
-            100% { transform: translate(3px, 3px) scale(0.99); opacity: 0.6; }
+            0% {
+                transform: translate(-3px, 3px) scale(1.02);
+                opacity: 0.3;
+            }
+
+            33% {
+                transform: translate(3px, -3px) scale(0.98);
+                opacity: 0.7;
+            }
+
+            66% {
+                transform: translate(-3px, -3px) scale(1.01);
+                opacity: 0.2;
+            }
+
+            100% {
+                transform: translate(3px, 3px) scale(0.99);
+                opacity: 0.6;
+            }
         }
+
         @keyframes btn-glitch3 {
-            0% { clip-path: polygon(0 0, 100% 0, 100% 30%, 0 30%); opacity: 0.4; }
-            20% { clip-path: polygon(0 70%, 100% 70%, 100% 100%, 0 100%); opacity: 0.2; }
-            40% { clip-path: polygon(0 20%, 100% 20%, 100% 50%, 0 50%); opacity: 0.6; }
-            60% { clip-path: polygon(0 0, 100% 0, 100% 10%, 0 10%); opacity: 0.3; }
-            80% { clip-path: polygon(0 90%, 100% 90%, 100% 100%, 0 100%); opacity: 0.5; }
-            100% { clip-path: polygon(0 40%, 100% 40%, 100% 70%, 0 70%); opacity: 0.2; }
+            0% {
+                clip-path: polygon(0 0, 100% 0, 100% 30%, 0 30%);
+                opacity: 0.4;
+            }
+
+            20% {
+                clip-path: polygon(0 70%, 100% 70%, 100% 100%, 0 100%);
+                opacity: 0.2;
+            }
+
+            40% {
+                clip-path: polygon(0 20%, 100% 20%, 100% 50%, 0 50%);
+                opacity: 0.6;
+            }
+
+            60% {
+                clip-path: polygon(0 0, 100% 0, 100% 10%, 0 10%);
+                opacity: 0.3;
+            }
+
+            80% {
+                clip-path: polygon(0 90%, 100% 90%, 100% 100%, 0 100%);
+                opacity: 0.5;
+            }
+
+            100% {
+                clip-path: polygon(0 40%, 100% 40%, 100% 70%, 0 70%);
+                opacity: 0.2;
+            }
         }
 
 
@@ -341,15 +403,19 @@
             .content-overlay {
                 grid-template-columns: 10px 1fr 10px;
             }
+
             .main-header {
                 top: 5vh;
             }
+
             .action-center {
                 margin-top: -2vh;
             }
+
             .mission-briefing {
                 padding-bottom: 3vh;
             }
+
             .briefing-text-mask {
                 max-width: 90%;
                 padding: 10px 15px;
@@ -360,15 +426,18 @@
             .main-header {
                 top: 9vh;
             }
+
             .action-center {
                 margin-top: 0;
                 position: relative;
                 padding: 5vh 0;
                 align-self: stretch;
             }
+
             .portal-button {
                 margin: 0 auto;
             }
+
             .mission-briefing {
                 position: absolute;
                 bottom: 2vh;
@@ -382,30 +451,37 @@
             .main-header {
                 top: 2vh;
             }
+
             #main-title {
                 font-size: 1.8rem;
             }
+
             .subtitle-glitch {
                 display: none;
             }
+
             .action-center {
                 margin-top: -2vh;
             }
+
             .portal-button {
                 padding: 10px 20px 10px 40px;
                 font-size: 1rem;
             }
+
             .portal-button .button-icon {
                 width: 16px;
                 height: 16px;
                 left: 12px;
             }
+
             .mission-briefing {
                 display: none;
             }
         }
     </style>
 </head>
+
 <body>
     <nav class="top-navbar hud-style">
         <div class="hud-brand-left">
@@ -470,25 +546,26 @@
         };
 
         const ARTIFACTS_DATA = [
-            { name: "五色鳥", url: "https://raw.githubusercontent.com/weiweiweiweiweiweiweiwei/weiwei.github.io/5d4cabe0bfc222c4bbf462072113ced55a6ff086/pic/%E4%BA%94%E8%89%B2%E9%B3%A5.svg" },
-            { name: "北投石", url: "https://raw.githubusercontent.com/weiweiweiweiweiweiweiwei/weiwei.github.io/5d4cabe0bfc222c4bbf462072113ced55a6ff086/pic/%E5%8C%97%E6%8A%95%E7%9F%B3.svg" },
-            { name: "古虹新姿", url: "https://raw.githubusercontent.com/weiweiweiweiweiweiweiwei/weiwei.github.io/5d4cabe0bfc222c4bbf462072113ced55a6ff086/pic/%E5%8F%A4%E8%99%B9%E6%96%B0%E5%A7%BF.svg" },
-            { name: "台灣水鹿", url: "https://raw.githubusercontent.com/weiweiweiweiweiweiweiwei/weiwei.github.io/fc29e99600658117be855b1afb6271a1653073b3/pic/%E5%8F%B0%E7%81%A3%E6%B0%B4%E9%B9%BF.svg" },
-            { name: "台灣藍鵲", url: "https://raw.githubusercontent.com/weiweiweiweiweiweiweiwei/weiwei.github.io/main/pic/%E5%8F%B0%E7%81%A3%E8%97%8D%E9%B5%B2.svg" },
-            { name: "寬尾鳳蝶", url: "https://raw.githubusercontent.com/weiweiweiweiweiweiweiwei/weiwei.github.io/fc29e99600658117be855b1afb6271a1653073b3/pic/%E5%AF%AC%E5%B0%BE%E9%B3%B3%E8%9D%B6.svg" },
-            { name: "排灣族木盾", url: "https://raw.githubusercontent.com/weiweiweiweiweiweiweiwei/weiwei.github.io/fc29e99600658117be855b1afb6271a1653073b3/pic/%E6%8E%92%E7%81%A3%E6%97%8F%E6%9C%A8%E7%9B%BE.svg" },
-            { name: "櫻花鉤吻鮭", url: "https://raw.githubusercontent.com/weiweiweiweiweiweiweiwei/weiwei.github.io/fc29e99600658117be855b1afb6271a1653073b3/pic/%E6%AB%BB%E8%8A%B1%E9%89%A4%E5%90%BB%E9%AE%AD.svg" },
-            { name: "泰雅族貝珠裙", url: "https://raw.githubusercontent.com/weiweiweiweiweiweiweiwei/weiwei.github.io/7ce042c6c9cacd6de311c900325f1a4faa418c09/pic/%E6%B3%B0%E9%9B%85%E6%97%8F%E8%B2%9D%E7%8F%A0%E8%A3%99.svg" },
-            { name: "熊鷹", url: "https://raw.githubusercontent.com/weiweiweiweiweiweiweiwei/weiwei.github.io/fc29e99600658117be855b1afb6271a1653073b3/pic/%E7%86%8A%E9%B7%B9.svg" },
-            { name: "石虎", url: "https://raw.githubusercontent.com/weiweiweiweiweiweiweiwei/weiwei.github.io/fc29e99600658117be855b1afb6271a1653073b3/pic/%E7%9F%B3%E8%99%8E.svg" },
-            { name: "硫磺", url: "https://raw.githubusercontent.com/weiweiweiweiweiweiweiwei/weiwei.github.io/fc29e99600658117be855b1afb6271a1653073b3/pic/%E7%A1%AB%E7%A3%BA.svg" },
-            { name: "穿山甲", url: "https://raw.githubusercontent.com/weiweiweiweiweiweiweiwei/weiwei.github.io/fc29e99600658117be855b1afb6271a1653073b3/pic/%E7%A9%BF%E5%B1%B1%E7%94%B2.svg" },
-            { name: "賽夏族貝珠踝飾", url: "https://raw.githubusercontent.com/weiweiweiweiweiweiweiwei/weiwei.github.io/fc29e99600658117be855b1afb6271a1653073b3/pic/%E8%B3%BD%E5%A4%8F%E6%97%8F%E8%B2%9D%E7%8F%A0%E8%B8%9D%E9%A3%BE.svg" },
-            { name: "雲豹", url: "https://raw.githubusercontent.com/weiweiweiweiweiweiweiwei/weiwei.github.io/fc29e99600658117be855b1afb6271a1653073b3/pic/%E9%9B%B2%E8%B1%B9.svg" },
-            { name: "香魚", url: "https://raw.githubusercontent.com/weiweiweiweiweiweiweiwei/weiwei.github.io/fc29e99600658117be855b1afb6271a1653073b3/pic/%E9%A6%99%E9%AD%9A.svg" },
-            { name: "黑長尾雉", url: "https://raw.githubusercontent.com/weiweiweiweiweiweiweiwei/weiwei.github.io/fc29e99600658117be855b1afb6271a1653073b3/pic/%E9%BB%91%E9%95%B7%E5%B0%BE%E9%9B%89.svg" },
-            { name: "龍宮翁戎螺", url: "https://raw.githubusercontent.com/weiweiweiweiweiweiweiwei/weiwei.github.io/fc29e99600658117be855b1afb6271a1653073b3/pic/%E9%BE%8D%E5%AE%AE%E7%BF%81%E6%88%8E%E8%9E%BA.svg" },
+            { name: "五色鳥", url: "svg/五色鳥.svg" },
+            { name: "北投石", url: "svg/北投石.svg" },
+            { name: "古虹新姿", url: "svg.svg" },
+            { name: "台灣水鹿", url: "svg/台灣水鹿.svg" },
+            { name: "台灣藍鵲", url: "svg/台灣藍鵲.svg" },
+            { name: "寬尾鳳蝶", url: "svg/寬尾鳳蝶.svg" },
+            { name: "排灣族木盾", url: "svg/排灣族木盾.svg" },
+            { name: "櫻花鉤吻鮭", url: "svg/應花鉤吻鮭.svg" },
+            { name: "泰雅族貝珠裙", url: "svg/泰雅族貝珠裙.svg" },
+            { name: "熊鷹", url: "svg/熊鷹.svg" },
+            { name: "石虎", url: "svg/石虎.svg" },
+            { name: "硫磺", url: "svg/硫磺.svg" },
+            { name: "穿山甲", url: "svg/穿山甲1.svg" },
+            { name: "賽夏族貝珠踝飾", url: "svg/賽夏族貝珠踝飾.svg" },
+            { name: "雲豹", url: "svg/雲豹.svg" },
+            { name: "香魚", url: "svg/香魚.svg" },
+            { name: "黑長尾雉", url: "svg/黑長尾雉.svg" },
+            { name: "龍宮翁戎螺", url: "svg/龍宮翁戎螺.svg" },
         ];
+
         const PRELOADED_ARTIFACT_IMAGES = {};
         const ARTIFACT_PIXEL_DATA_CACHE = {};
 
@@ -743,4 +820,5 @@
         if (enterButton) { enterButton.addEventListener('click', () => { window.location.href = "https://wallace909080.wixstudio.com/my-site"; }); }
     </script>
 </body>
+
 </html>
